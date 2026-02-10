@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Trip - Pre-Trip Checklist</title>
+<style>
+:root {
+    --primary: #8B0000;
+    --secondary: #FFB7C5;
+    --accent: #D4AF37;
+    --bg: #FFF8F0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    line-height: 1.6;
+    color: #333;
+}
+
+h1 {
+    color: var(--primary);
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+nav {
+    background: var(--bg);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+nav a {
+    color: var(--primary);
+    text-decoration: none;
+    padding: 8px 16px;
+    margin: 5px;
+    display: inline-block;
+    border-radius: 4px;
+    background: white;
+    border: 1px solid var(--secondary);
+}
+
+h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-top: 40px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--secondary);
+}
+
+.urgent {
+    background: #FFE4E1;
+    border-left: 4px solid #FF6B6B;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.urgent h3 {
+    color: #FF6B6B;
+    margin-top: 0;
+}
+
+.section {
+    background: white;
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.checklist-item {
+    background: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border-left: 4px solid var(--accent);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.checklist-item:hover {
+    background: var(--bg);
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.checklist-item.checked {
+    background: #d4edda;
+    opacity: 0.7;
+    text-decoration: line-through;
+}
+
+.checklist-item label {
+    cursor: pointer;
+    font-size: 1.05rem;
+}
+
+.deadline {
+    color: #FF6B6B;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.info-box {
+    background: #E3F2FD;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid #2196F3;
+}
+
+.tip {
+    background: #d4edda;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid #28a745;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 40px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 30px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 21px;
+    width: 2px;
+    height: calc(100% - 10px);
+    background: var(--secondary);
+}
+
+.timeline-item:last-child::after {
+    display: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin: 10px 10px 10px 0;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #C41E3A;
+}
+
+.countdown-box {
+    background: linear-gradient(135deg, var(--primary), #C41E3A);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.countdown-box h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.5rem;
+}
+
+.days-left {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), #C41E3A);
+    transition: width 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1>🇯🇵 Pre-Trip Checklist</h1>
+<p class="subtitle">Japan Adventure • March 4-17, 2026</p>
+
+<nav>
+    <a href="index.html">← Back to Main Guide</a>
+</nav>
+
+<div class="countdown-box">
+    <h3>⏰ Days Until Trip</h3>
+    <div class="days-left" id="countdown">Loading...</div>
+    <div id="countdown-text"></div>
+</div>
+
+<div class="progress-bar">
+    <div class="progress-fill" id="progress" style="width: 0%">
+        <span id="progress-text">0% Complete</span>
+    </div>
+</div>
+
+<!-- URGENT ACTIONS -->
+<div class="urgent">
+    <h3>🚨 URGENT - Do These FIRST!</h3>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-restaurants">
+        <label for="check-restaurants"><strong>Book High-End Restaurants NOW</strong> - Deadline is 2-3 months before trip</label>
+        <div class="deadline">⏰ Deadline: Early December 2025 - Mid January 2026</div>
+        <div class="info-box" style="margin-top: 10px;">
+            <strong>Where to book:</strong> <a href="https://tableall.com" target="_blank">TableAll.com</a>, 
+            <a href="https://omakase.in" target="_blank">Omakase.in</a>, 
+            <a href="https://tabelog.com/en/" target="_blank">Tabelog</a>
+        </div>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-passport">
+        <label for="check-passport"><strong>Check Passport Validity</strong> - Must be valid for entire stay</label>
+        <div class="info-box" style="margin-top: 10px;">
+            ✅ Your passport must be valid through at least March 17, 2026
+        </div>
+    </div>
+</div>
+
+<!-- OFFICIAL FORMS -->
+<h2>📋 Official Forms & Registration</h2>
+
+<div class="section">
+    <h3>🌐 Visit Japan Web (Recommended)</h3>
+    <p><strong>Complete 48 hours before departure</strong> (must be done at least 6 hours before landing)</p>
+    
+    <div class="info-box">
+        <strong>What is it?</strong> Official Japanese government website to complete immigration & customs forms online. 
+        Generates a QR code you show at the airport instead of filling out paper forms.
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-vjw-account">
+        <label for="check-vjw-account">Create Visit Japan Web account</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-vjw-profile">
+        <label for="check-vjw-profile">Register your personal info (passport details, etc.)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-vjw-trip">
+        <label for="check-vjw-trip">Register trip details (arrival date, flight, hotel address)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-vjw-immigration">
+        <label for="check-vjw-immigration">Complete Immigration (ED Card) form</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-vjw-customs">
+        <label for="check-vjw-customs">Complete Customs Declaration form</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-vjw-qr">
+        <label for="check-vjw-qr">Save QR code (screenshot or bookmark)</label>
+    </div>
+    
+    <a href="https://vjw.digital.go.jp/" target="_blank" class="btn">Go to Visit Japan Web →</a>
+    
+    <div class="tip">
+        <strong>💡 Pro Tips:</strong>
+        <ul>
+            <li>You'll need your hotel address in Japan - use Shiba Park Hotel for arrival</li>
+            <li>Screenshot your QR code in case of phone issues</li>
+            <li>Both people need to do this separately</li>
+            <li>Takes about 10-15 minutes total</li>
+        </ul>
+    </div>
+    
+    <div class="info-box">
+        <strong>Alternative:</strong> You can skip this and fill out paper forms on the plane, but Visit Japan Web is faster at the airport!
+    </div>
+</div>
+
+<!-- TRAVEL BOOKINGS -->
+<h2>✈️ Travel Bookings & Reservations</h2>
+
+<div class="section">
+    <h3>1-2 Months Before (January 2026)</h3>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-teamlab">
+        <label for="check-teamlab">Book TeamLab Planets tickets (specific time slot)</label>
+        <div class="deadline">📅 Date needed: March 7, 2026 ~2:30 PM</div>
+        <a href="https://www.teamlab.art/e/planets/" target="_blank" style="margin-left: 35px; color: #2196F3;">→ Book here</a>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-shinkansen">
+        <label for="check-shinkansen">Research Shinkansen E seats for Mt. Fuji viewing</label>
+        <div class="tip" style="margin-top: 10px;">
+            <strong>Important:</strong> Book E seats (right side, rows 11-15 best) Tokyo → Kyoto on March 8. 
+            Can book online or at station, but check process ahead of time.
+        </div>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-insurance">
+        <label for="check-insurance">Purchase travel insurance</label>
+    </div>
+</div>
+
+<!-- FINANCIAL PREP -->
+<h2>💳 Financial Preparation</h2>
+
+<div class="section">
+    <div class="checklist-item">
+        <input type="checkbox" id="check-bank-notify">
+        <label for="check-bank-notify">Notify bank/credit card companies of travel dates</label>
+        <div class="deadline">Do this 1-2 weeks before departure</div>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-pin">
+        <label for="check-pin">Verify credit card PIN (for chip transactions)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-yen">
+        <label for="check-yen">Order yen cash OR plan to use 7-Eleven ATMs</label>
+        <div class="info-box" style="margin-top: 10px;">
+            💰 Bring ~$200-300 cash in yen for first day. Many places in Japan are cash-only!
+        </div>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-wallet">
+        <label for="check-wallet">Get coin purse (Japan uses coins heavily!)</label>
+    </div>
+</div>
+
+<!-- APPS & DOWNLOADS -->
+<h2>📱 Apps & Downloads</h2>
+
+<div class="section">
+    <div class="checklist-item">
+        <input type="checkbox" id="check-maps">
+        <label for="check-maps">Download Google Maps offline for Tokyo, Kyoto, Osaka</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-deepl">
+        <label for="check-deepl">Download DeepL Translator app</label>
+        <a href="https://www.deepl.com/" target="_blank" style="margin-left: 35px; color: #2196F3;">→ Get DeepL</a>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-tabelog">
+        <label for="check-tabelog">Download Tabelog app (Japanese restaurant reviews)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-hyperdia">
+        <label for="check-hyperdia">Download Hyperdia (train schedule app)</label>
+    </div>
+</div>
+
+<!-- HEALTH & DOCUMENTS -->
+<h2>🏥 Health & Documents</h2>
+
+<div class="section">
+    <div class="checklist-item">
+        <input type="checkbox" id="check-prescriptions">
+        <label for="check-prescriptions">Get 30-day supply of any prescription medications</label>
+        <div class="info-box" style="margin-top: 10px;">
+            ⚠️ Keep medications in original bottles with labels. Japan is strict about controlled substances!
+        </div>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-allergy">
+        <label for="check-allergy">Pack allergy medication (March = pollen season!)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-masks">
+        <label for="check-masks">Pack face masks (common courtesy in Japan)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-passport-copy">
+        <label for="check-passport-copy">Make photocopies of passport & keep separate</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-hotel-print">
+        <label for="check-hotel-print">Print hotel confirmations (backup for phone)</label>
+    </div>
+</div>
+
+<!-- PACKING -->
+<h2>🎒 Packing Essentials</h2>
+
+<div class="section">
+    <h3>Running Gear</h3>
+    <div class="checklist-item">
+        <input type="checkbox" id="check-running-shoes">
+        <label for="check-running-shoes">Running shoes (broken in!)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-running-clothes">
+        <label for="check-running-clothes">3-4 running outfits (shorts/shirts)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-jacket">
+        <label for="check-jacket">Light running jacket (mornings are cold!)</label>
+    </div>
+    
+    <h3 style="margin-top: 30px;">Clothing (March Weather: 5-10°C mornings, 15-20°C afternoons)</h3>
+    <div class="checklist-item">
+        <input type="checkbox" id="check-layers">
+        <label for="check-layers">Layers! Medium jacket, long-sleeves, sweater</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-comfortable">
+        <label for="check-comfortable">Comfortable walking shoes (you'll walk 15,000+ steps/day!)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-slip-on">
+        <label for="check-slip-on">Slip-on shoes (you'll remove shoes constantly!)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-umbrella">
+        <label for="check-umbrella">Compact umbrella</label>
+    </div>
+    
+    <h3 style="margin-top: 30px;">Tech</h3>
+    <div class="checklist-item">
+        <input type="checkbox" id="check-adapter">
+        <label for="check-adapter">Power adapter (Japan uses Type A plugs - US style)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-powerbank">
+        <label for="check-powerbank">Portable power bank (charged!)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-chargers">
+        <label for="check-chargers">All phone/device chargers</label>
+    </div>
+    
+    <h3 style="margin-top: 30px;">Japan-Specific</h3>
+    <div class="checklist-item">
+        <input type="checkbox" id="check-towel">
+        <label for="check-towel">Small towel (for onsen/ryokan)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-shorts-teamlab">
+        <label for="check-shorts-teamlab">Shorts/pants you can roll up (TeamLab Planets - you walk through water!)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-bags">
+        <label for="check-bags">Reusable shopping bags (Japan charges for plastic bags)</label>
+    </div>
+    
+    <div class="checklist-item">
+        <input type="checkbox" id="check-tissues">
+        <label for="check-tissues">Travel tissues (some bathrooms don't have toilet paper!)</label>
+    </div>
+</div>
+
+<!-- FINAL WEEK -->
+<h2>📅 Final Week Before Departure</h2>
+
+<div class="section">
+    <div class="timeline">
+        <div class="timeline-item">
+            <h4>1 Week Before (Feb 25-26)</h4>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-vjw-complete">
+                <label for="check-vjw-complete">Complete Visit Japan Web (if not done already)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-reconfirm">
+                <label for="check-reconfirm">Reconfirm all hotel bookings</label>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2-3 Days Before (March 1-2)</h4>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-online-checkin">
+                <label for="check-online-checkin">Online check-in for flight</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-devices">
+                <label for="check-devices">Charge all devices</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-house">
+                <label for="check-house">Arrange house/pet care</label>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>Day Before (March 3)</h4>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-final-pack">
+                <label for="check-final-pack">Final packing check</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-passport-check">
+                <label for="check-passport-check">Passport, tickets, hotel confirmations in carry-on</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-airport-transport">
+                <label for="check-airport-transport">Confirm airport transportation</label>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>Departure Day (March 4)</h4>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-suica">
+                <label for="check-suica">Buy Suica card immediately upon landing at Haneda!</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check-currency">
+                <label for="check-currency">Have QR code ready from Visit Japan Web</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HELPFUL LINKS -->
+<h2>🔗 Helpful Links</h2>
+
+<div class="section">
+    <h3>Official Sites</h3>
+    <a href="https://vjw.digital.go.jp/" target="_blank" class="btn">Visit Japan Web</a>
+    <a href="https://www.japan.travel/" target="_blank" class="btn">Japan Tourism</a>
+    <a href="https://www.customs.go.jp/english/" target="_blank" class="btn">Japan Customs</a>
+    
+    <h3 style="margin-top: 20px;">Booking Sites</h3>
+    <a href="https://tableall.com" target="_blank" class="btn">TableAll (Restaurants)</a>
+    <a href="https://www.teamlab.art/e/planets/" target="_blank" class="btn">TeamLab Planets</a>
+    <a href="https://www.klook.com/" target="_blank" class="btn">Klook (Activities)</a>
+</div>
+
+<div style="text-align: center; margin: 40px 0;">
+    <a href="index.html" class="btn">← Back to Main Guide</a>
+</div>
+
+<script>
+// Countdown
+function updateCountdown() {
+    const tripDate = new Date('2026-03-04T15:20:00').getTime();
+    const now = new Date().getTime();
+    const distance = tripDate - now;
+    
+    if (distance < 0) {
+        document.getElementById('countdown').textContent = '🎉';
+        document.getElementById('countdown-text').textContent = "You're in Japan!";
+        return;
+    }
+    
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    document.getElementById('countdown').textContent = days;
+    document.getElementById('countdown-text').textContent = days === 1 ? 'day to go!' : 'days to go!';
+}
+
+updateCountdown();
+setInterval(updateCountdown, 60000); // Update every minute
+
+// Checklist functionality
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const totalItems = checkboxes.length;
+
+function updateProgress() {
+    let completed = 0;
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) completed++;
+    });
+    
+    const percentage = Math.round((completed / totalItems) * 100);
+    document.getElementById('progress').style.width = percentage + '%';
+    document.getElementById('progress-text').textContent = percentage + '% Complete (' + completed + '/' + totalItems + ')';
+}
+
+checkboxes.forEach((checkbox, index) => {
+    // Load saved state
+    const saved = localStorage.getItem('japan-check-' + checkbox.id);
+    if (saved === 'true') {
+        checkbox.checked = true;
+        checkbox.parentElement.classList.add('checked');
+    }
+    
+    // Save on change
+    checkbox.addEventListener('change', function() {
+        localStorage.setItem('japan-check-' + checkbox.id, this.checked);
+        this.parentElement.classList.toggle('checked', this.checked);
+        updateProgress();
+    });
+});
+
+updateProgress();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,3799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Adventure 2026 | Ultimate Planner</title>
+<style>
+:root { --primary: #8B0000; --secondary: #FFB7C5; --accent: #D4AF37; --bg: #FFF8F0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background: white; }
+h1 { color: var(--primary); text-align: center; font-size: 2.5rem; margin: 20px 0; }
+h2 { color: var(--primary); font-size: 1.8rem; margin: 30px 0 15px; padding-bottom: 10px; border-bottom: 3px solid var(--secondary); }
+h3 { color: var(--primary); font-size: 1.4rem; margin: 20px 0 10px; }
+h4 { font-size: 1.1rem; color: #333; margin: 15px 0 8px; }
+.subtitle { text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 30px; }
+nav { background: var(--bg); padding: 15px; border-radius: 8px; margin: 20px 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+nav a { color: var(--primary); text-decoration: none; padding: 8px 16px; border-radius: 4px; background: white; border: 1px solid var(--secondary); transition: all 0.3s; }
+nav a:hover { background: var(--primary); color: white; }
+.user-selector { background: var(--bg); padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; }
+.user-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
+.user-btn { padding: 10px 20px; border: 2px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-size: 16px; transition: all 0.3s; }
+.user-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.user-btn.active { border-color: var(--primary); background: var(--primary); color: white; font-weight: bold; }
+.intro, .info-box { background: var(--bg); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent); margin: 20px 0; }
+.run-box { background: #E3F2FD; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2196F3; }
+.tip-box, .green { background: #d4edda; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #28a745; }
+.highlight { background: #FFF3CD; padding: 12px; border-radius: 6px; margin: 10px 0; }
+.budget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+.budget-card { background: var(--bg); padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid var(--accent); }
+.budget-card h3 { font-size: 1rem; margin: 0 0 10px 0; color: #666; }
+.budget-amount { font-size: 2rem; font-weight: bold; color: var(--primary); }
+.budget-note { font-size: 0.85rem; color: #666; margin-top: 5px; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+th { background: var(--primary); color: white; padding: 12px; text-align: left; }
+td { padding: 10px; border: 1px solid #ddd; }
+tr:nth-child(even) { background: var(--bg); }
+.nightlife-section { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 25px; border-radius: 12px; margin: 30px 0; }
+.nightlife-section h3 { color: #ffd700; margin-bottom: 20px; }
+.club-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px; }
+.club-card { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; border-left: 4px solid #ffd700; }
+.club-name { color: #ffd700; font-weight: bold; font-size: 1.1rem; margin-bottom: 8px; }
+.club-details { font-size: 0.9rem; opacity: 0.95; margin: 5px 0; }
+.day-section { background: white; border: 2px solid var(--secondary); border-radius: 12px; padding: 25px; margin: 30px 0; }
+.day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid var(--secondary); }
+.day-title { color: var(--primary); font-size: 1.5rem; margin: 0; }
+.add-activity-btn, .edit-btn { padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s; margin-left: 5px; }
+.add-activity-btn:hover, .edit-btn:hover { background: #C41E3A; transform: translateY(-2px); }
+.edit-btn { padding: 5px 10px; font-size: 14px; }
+.activity-card { background: #f9f9f9; border-left: 4px solid var(--accent); border-radius: 8px; padding: 15px; margin: 10px 0; transition: all 0.3s; position: relative; }
+.activity-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateX(5px); }
+.activity-card.editable { border-left-color: #2196F3; }
+.activity-time { font-weight: bold; color: var(--primary); font-size: 1.1rem; }
+.activity-title { font-size: 1.05rem; font-weight: bold; margin: 8px 0; }
+.activity-details { color: #666; margin: 5px 0; font-size: 0.95rem; }
+.activity-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.delete-btn { padding: 5px 10px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+.delete-btn:hover { background: #ff5252; }
+.attendee-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; margin: 5px 5px 5px 0; }
+.dewitt { background: #4A90E2; color: white; }
+.christine { background: #E91E63; color: white; }
+.dani { background: #9C27B0; color: white; }
+.kimothy { background: #FF9800; color: white; }
+.added-by { font-size: 0.85rem; color: #999; font-style: italic; margin-top: 8px; }
+.original-activity { opacity: 0.95; }
+.custom-activity { background: #e8f5e9; }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center; }
+.modal.active { display: flex; }
+.modal-content { background: white; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+.form-group input, .form-group textarea { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 16px; }
+.form-group textarea { min-height: 80px; resize: vertical; }
+.attendee-checkboxes { display: flex; flex-direction: column; gap: 10px; }
+.attendee-checkboxes label { display: flex; align-items: center; gap: 10px; font-weight: normal; cursor: pointer; }
+.attendee-checkboxes input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+.modal-buttons { display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px; }
+.btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.3s; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: #C41E3A; }
+.btn-secondary { background: #ddd; color: #333; }
+.btn-secondary:hover { background: #ccc; }
+.btn-link, .landmark-links a { display: inline-block; padding: 8px 16px; background: var(--bg); color: var(--primary); text-decoration: none; border-radius: 4px; border: 1px solid var(--secondary); margin: 5px 5px 5px 0; font-size: 0.9rem; transition: all 0.3s; }
+.btn-link:hover, .landmark-links a:hover { background: var(--primary); color: white; }
+.landmark-links { display: flex; flex-wrap: wrap; gap: 5px; margin: 15px 0; }
+ul, ol { margin: 15px 0 15px 25px; }
+li { margin: 8px 0; }
+.restaurant-card { background: white; border: 2px solid var(--secondary); border-radius: 8px; padding: 15px; margin: 15px 0; }
+.restaurant-card h4 { margin-top: 0; color: var(--primary); }
+.restaurant-card .subtitle-text { font-size: 0.9rem; color: #666; font-style: italic; margin: 5px 0; }
+.restaurant-card .price { color: #28a745; font-weight: bold; margin-top: 10px; }
+@media (max-width: 768px) {
+    .club-grid, .budget-grid { grid-template-columns: 1fr; }
+    nav { position: relative; }
+    .day-header { flex-direction: column; gap: 15px; align-items: flex-start; }
+}
+
+.city-header-img {
+    width: 100%;
+    max-width: 1200px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* VOTING SYSTEM */
+.voting-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.vote-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.vote-btn {
+    padding: 6px 12px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.vote-btn:hover {
+    transform: scale(1.1);
+}
+
+.vote-btn.voted {
+    border-color: var(--primary);
+    background: var(--bg);
+}
+
+.vote-count {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* COMMENTS SYSTEM */
+.comments-toggle {
+    padding: 5px 12px;
+    background: #e3f2fd;
+    color: #1976d2;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.comments-toggle:hover {
+    background: #bbdefb;
+}
+
+.comments-section {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 6px;
+    border-left: 3px solid #1976d2;
+}
+
+.comments-section.active {
+    display: block;
+}
+
+.comment {
+    background: white;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--accent);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-time {
+    color: #999;
+}
+
+.comment-text {
+    font-size: 0.95rem;
+}
+
+.comment-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}
+
+.comment-submit {
+    padding: 8px 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-submit:hover {
+    background: #C41E3A;
+}
+
+/* COUNTDOWN TIMER */
+.countdown-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, #C41E3A 100%);
+    color: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.countdown-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.countdown-unit {
+    background: rgba(255,255,255,0.2);
+    padding: 15px 20px;
+    border-radius: 8px;
+    min-width: 80px;
+}
+
+.countdown-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    display: block;
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* PHOTO UPLOAD */
+.photo-section {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+
+.photo-upload-btn {
+    padding: 8px 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.photo-upload-btn:hover {
+    background: #45a049;
+}
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.photo-item {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.photo-delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255,0,0,0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* NOTIFICATIONS FEED */
+.notifications-panel {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    z-index: 999;
+    display: none;
+}
+
+.notifications-panel.active {
+    display: block;
+}
+
+.notification-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.notification-item:hover {
+    background: #f5f5f5;
+}
+
+.notification-new {
+    background: #e3f2fd;
+}
+
+.notification-time {
+    color: #999;
+    font-size: 0.75rem;
+    margin-top: 5px;
+}
+
+.notification-bell {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* MAP VIEW */
+.map-toggle-btn {
+    padding: 10px 20px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.map-toggle-btn:hover {
+    background: #1976D2;
+}
+
+.map-container {
+    display: none;
+    width: 100%;
+    height: 500px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 2px solid #ddd;
+}
+
+.map-container.active {
+    display: block;
+}
+
+/* PACKING LIST */
+.packing-shared {
+    background: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.packing-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: white;
+    margin: 5px 0;
+    border-radius: 4px;
+}
+
+.packing-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.packing-owner {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* OFFLINE INDICATOR */
+.offline-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff9800;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: none;
+    z-index: 9999;
+}
+
+.offline-banner.active {
+    display: block;
+}
+
+/* DRAG AND DROP */
+.activity-card.dragging {
+    opacity: 0.5;
+    cursor: move;
+}
+
+.activity-card {
+    cursor: grab;
+}
+
+.activity-card:active {
+    cursor: grabbing;
+}
+
+/* SHARED LINKS */
+.links-section {
+    background: #fff3cd;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: white;
+    margin: 8px 0;
+    border-radius: 4px;
+}
+
+.link-category {
+    display: inline-block;
+    padding: 3px 8px;
+    background: var(--accent);
+    color: white;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-right: 10px;
+}
+
+/* CALENDAR EXPORT */
+.export-btn {
+    padding: 10px 20px;
+    background: #9C27B0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px 5px;
+}
+
+.export-btn:hover {
+    background: #7B1FA2;
+}
+
+/* ACTIVITY FEED */
+.activity-feed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.feed-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary);
+}
+
+.feed-item {
+    padding: 8px;
+    margin: 5px 0;
+    background: #f9f9f9;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.feed-time {
+    color: #999;
+    font-size: 0.75rem;
+}
+
+/* TIMELINE VIEW */
+.timeline-view {
+    display: none;
+    margin: 30px 0;
+}
+
+.timeline-view.active {
+    display: block;
+}
+
+.timeline-day {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 30px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--primary);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 15px;
+    top: 30px;
+    bottom: -30px;
+    width: 2px;
+    background: var(--secondary);
+}
+
+.view-toggle {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.view-btn {
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid var(--secondary);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.view-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* NEWS SECTION */
+.news-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.news-header {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.news-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.news-item {
+    background: rgba(255,255,255,0.15);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid rgba(255,255,255,0.5);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.news-item-main {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.news-item-time {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.news-empty {
+    text-align: center;
+    padding: 30px;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* JAPANESE THEME DESIGN */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap');
+
+:root {
+    --primary: #C41E3A; /* Japanese red */
+    --secondary: #FFE5E5;
+    --accent: #D4AF37; /* Gold */
+    --bg: #FFF8F0; /* Warm paper */
+    --dark: #1a1a1a;
+    --sakura: #FFB7C5; /* Cherry blossom */
+    --bamboo: #7CB342;
+    --indigo: #4A148C;
+}
+
+body {
+    font-family: 'Noto Sans JP', -apple-system, sans-serif;
+    background: linear-gradient(to bottom, #FFF8F0 0%, #FFE5E5 100%);
+    background-attachment: fixed;
+}
+
+h1, h2, h3 {
+    font-family: 'Noto Serif JP', serif;
+    position: relative;
+}
+
+h1 {
+    background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(196, 30, 58, 0.1);
+}
+
+h2::before {
+    content: "🌸";
+    margin-right: 10px;
+}
+
+/* Japanese wave pattern background */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 35px,
+            rgba(196, 30, 58, 0.03) 35px,
+            rgba(196, 30, 58, 0.03) 70px
+        );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Japanese border patterns */
+.day-section, .info-box, .run-box, .nightlife-section {
+    border-top: 3px solid var(--primary);
+    border-bottom: 3px solid var(--primary);
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.day-section::before,
+.day-section::after {
+    content: "◆";
+    position: absolute;
+    top: -15px;
+    color: var(--primary);
+    font-size: 20px;
+    background: white;
+    padding: 0 10px;
+}
+
+.day-section::before {
+    left: 20px;
+}
+
+.day-section::after {
+    right: 20px;
+}
+
+/* Cherry blossom decorations */
+.activity-card::after {
+    content: "🌸";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0.1;
+    font-size: 40px;
+    pointer-events: none;
+}
+
+/* Japanese button styles */
+button, .btn, .add-activity-btn, .edit-btn, .vote-btn {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(196, 30, 58, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, .btn:hover, .add-activity-btn:hover, .edit-btn:hover {
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Navigation with Japanese style */
+nav {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 229, 229, 0.95) 100%);
+    border-bottom: 3px double var(--primary);
+    box-shadow: 0 4px 20px rgba(196, 30, 58, 0.15);
+}
+
+nav a {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+nav a:hover {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* Countdown with Japanese aesthetic */
+.countdown-banner {
+    background: linear-gradient(135deg, #C41E3A 0%, #8B0000 50%, #C41E3A 100%);
+    box-shadow: 0 8px 32px rgba(196, 30, 58, 0.4);
+    border: 3px double rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-banner::before {
+    content: "⛩️";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 60px;
+    opacity: 0.2;
+}
+
+.countdown-banner::after {
+    content: "⛩️";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 60px;
+    opacity: 0.2;
+}
+
+.countdown-unit {
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* News section Japanese style */
+.news-section {
+    background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+    border: 3px double rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(74, 20, 140, 0.3);
+}
+
+.news-item {
+    border-left: 4px solid #FFD700;
+}
+
+/* Activity cards with washi paper effect */
+.activity-card {
+    background: linear-gradient(to bottom right, #ffffff 0%, #fffbf5 100%);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-left-width: 5px;
+}
+
+.activity-card:hover {
+    box-shadow: 
+        0 8px 24px rgba(196, 30, 58, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* User tags with Japanese colors */
+.dewitt { background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%); }
+.christine { background: linear-gradient(135deg, #EC407A 0%, #C2185B 100%); }
+.dani { background: linear-gradient(135deg, #AB47BC 0%, #7B1FA2 100%); }
+.kimothy { background: linear-gradient(135deg, #FF7043 0%, #E64A19 100%); }
+
+/* Tables with Japanese aesthetic */
+table {
+    border: 3px double var(--primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+th {
+    background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+tr:hover {
+    background: rgba(196, 30, 58, 0.05);
+}
+
+/* Map and weather cards */
+.budget-card {
+    background: linear-gradient(to bottom right, #ffffff 0%, #fff8f0 100%);
+    border: 2px solid var(--sakura);
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.1);
+    transition: all 0.3s ease;
+}
+
+.budget-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(196, 30, 58, 0.2);
+}
+
+/* Nightlife section */
+.nightlife-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 3px double rgba(255, 215, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.club-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 4px solid #FFD700;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.club-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(10px);
+}
+
+/* Run boxes */
+.run-box {
+    background: linear-gradient(to bottom right, #E3F2FD 0%, #BBDEFB 100%);
+    border-left: 5px solid #2196F3;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+/* Packing and links sections */
+.packing-shared {
+    background: linear-gradient(to bottom right, #E8F5E9 0%, #C8E6C9 100%);
+    border: 2px solid var(--bamboo);
+    box-shadow: 0 4px 12px rgba(124, 179, 66, 0.2);
+}
+
+.links-section {
+    background: linear-gradient(to bottom right, #FFF3CD 0%, #FFE69C 100%);
+    border: 2px solid var(--accent);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary) 0%, #8B0000 100%);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Add subtle animation to page load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Japanese decorative elements */
+.day-title::before {
+    content: "◈";
+    margin-right: 10px;
+    color: var(--primary);
+}
+
+/* Photo gallery with Japanese frame */
+.photo-item {
+    border: 3px solid var(--sakura);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.photo-item:hover {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+
+/* INTERACTIVE MAP STYLES */
+.day-map-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 3px solid var(--sakura);
+    box-shadow: 0 4px 16px rgba(196, 30, 58, 0.2);
+    overflow: hidden;
+}
+
+.map-toggle-day {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px 0;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.map-toggle-day:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+}
+
+/* WEATHER WIDGET STYLES */
+.weather-widget {
+    background: linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 4px 16px rgba(33, 150, 243, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.weather-current {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.weather-temp {
+    font-size: 3rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.weather-icon {
+    font-size: 4rem;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.weather-detail {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.weather-label {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.weather-value {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.weather-forecast {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.forecast-day {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.forecast-date {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+.forecast-temp {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.weather-loading {
+    text-align: center;
+    padding: 40px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* LINK PREVIEW STYLES */
+.link-preview {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px 0;
+    border: 2px solid var(--sakura);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.link-preview:hover {
+    box-shadow: 0 4px 16px rgba(196, 30, 58, 0.2);
+    transform: translateY(-2px);
+}
+
+.link-preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.link-preview-content {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.link-preview-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.link-preview-description {
+    color: #666;
+    font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.link-preview-url {
+    font-size: 0.75rem;
+    color: #999;
+    font-style: italic;
+}
+
+.link-preview-loading {
+    padding: 20px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .link-preview {
+        flex-direction: column;
+    }
+    
+    .link-preview-image {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .weather-temp {
+        font-size: 2rem;
+    }
+    
+    .weather-icon {
+        font-size: 3rem;
+    }
+}
+
+
+/* RESTAURANT SUGGESTIONS */
+.restaurant-suggestions {
+    background: linear-gradient(to bottom right, #FFF8DC 0%, #FFE4B5 100%);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 3px solid #FF6B6B;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
+
+.meal-section {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid #FF6B6B;
+}
+
+.meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #FFE4B5;
+}
+
+.meal-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-restaurant-btn {
+    padding: 8px 16px;
+    background: #FF6B6B;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.add-restaurant-btn:hover {
+    background: #FF5252;
+    transform: translateY(-2px);
+}
+
+.restaurant-card {
+    background: #FFFAF0;
+    border: 2px solid #FFE4B5;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.restaurant-card:hover {
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+    transform: translateX(5px);
+}
+
+.restaurant-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #D32F2F;
+    margin-bottom: 8px;
+}
+
+.restaurant-cuisine {
+    display: inline-block;
+    background: #FF6B6B;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-right: 8px;
+}
+
+.restaurant-details {
+    color: #666;
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+.restaurant-votes {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #FFE4B5;
+}
+
+.restaurant-vote-btn {
+    padding: 6px 12px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.restaurant-vote-btn:hover {
+    transform: scale(1.1);
+}
+
+.restaurant-vote-btn.voted {
+    border-color: #FF6B6B;
+    background: #FFF5F5;
+}
+
+.restaurant-suggestion-empty {
+    text-align: center;
+    padding: 30px;
+    color: #999;
+    font-style: italic;
+}
+
+.restaurant-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+
+/* Restaurant modal specific styles */
+#restaurantForm input[type="url"],
+#restaurantForm input[type="tel"] {
+    font-family: monospace;
+    font-size: 14px;
+}
+
+#restaurantForm small {
+    display: block;
+    margin-top: 5px;
+}
+
+.restaurant-card a {
+    text-decoration: none;
+}
+
+.restaurant-card a:hover {
+    text-decoration: underline;
+}
+
+</style>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+
+<!-- Add Japanese characters for aesthetic -->
+<div style="position: fixed; top: 100px; right: -50px; font-size: 200px; opacity: 0.02; pointer-events: none; z-index: -1; font-family: 'Noto Serif JP', serif; color: var(--primary); transform: rotate(90deg);">
+    日本
+</div>
+
+<div style="position: fixed; bottom: 100px; left: -50px; font-size: 200px; opacity: 0.02; pointer-events: none; z-index: -1; font-family: 'Noto Serif JP', serif; color: var(--primary); transform: rotate(-90deg);">
+    旅行
+</div>
+
+<h1>🇯🇵 JAPAN</h1>
+<p class="subtitle">Ultimate Travel Guide & Group Planner<br>March 4 – 17, 2026</p>
+
+<nav>
+    <a href="#planner">👥 Group Planner</a>
+    <a href="checklist.html">📋 Checklist</a>
+    <a href="#budget">Budget</a>
+    <a href="#weather">Weather</a>
+    <a href="#hotels">Hotels</a>
+    <a href="#tokyo">Tokyo</a>
+    <a href="#kyoto">Kyoto</a>
+    <a href="#osaka">Osaka</a>
+    <a href="#hakone">Hakone</a>
+    <a href="#tips">Tips</a>
+    <a href="#" id="notificationBell" style="position: relative;">
+        🔔
+        <span class="notification-badge" id="notificationCount" style="display: none;">0</span>
+    </a>
+    <a href="#" id="feedToggle">📋 Activity Feed</a>
+    <a href="#" id="mapToggle">🗺️ Map View</a>
+    <a href="#" id="exportCalendar">📅 Export Calendar</a>
+
+</nav>
+
+<div class="countdown-banner">
+    <div class="countdown-title">🇯🇵 JAPAN TRIP COUNTDOWN 🇯🇵</div>
+    <div class="countdown-timer" id="countdown">
+        <div class="countdown-unit">
+            <span class="countdown-number" id="days">--</span>
+            <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-unit">
+            <span class="countdown-number" id="hours">--</span>
+            <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-unit">
+            <span class="countdown-number" id="minutes">--</span>
+            <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-unit">
+            <span class="countdown-number" id="seconds">--</span>
+            <span class="countdown-label">Seconds</span>
+        </div>
+    </div>
+</div>
+
+
+<!-- ACTIVITY FEED -->
+<div class="activity-feed" id="activityFeed" style="display: none;">
+    <div class="feed-header">Recent Activity</div>
+    <div id="feedContent"></div>
+</div>
+
+<!-- NOTIFICATIONS PANEL -->
+<div class="notifications-panel" id="notificationsPanel">
+    <div style="padding: 15px; border-bottom: 2px solid #eee; font-weight: bold;">Notifications</div>
+    <div id="notificationsList"></div>
+</div>
+
+<!-- OFFLINE INDICATOR -->
+<div class="offline-banner" id="offlineBanner">
+    📡 You're offline - changes will sync when reconnected
+</div>
+
+<!-- MAP CONTAINER -->
+<div class="map-container" id="mapContainer">
+    <div id="map" style="width: 100%; height: 100%;"></div>
+</div>
+
+<!-- VIEW TOGGLE -->
+<div class="view-toggle" style="display: none;">
+    <button class="view-btn active" data-view="list">📋 List View</button>
+    <button class="view-btn" data-view="timeline">📅 Timeline View</button>
+</div>
+
+<!-- SHARED LINKS SECTION -->
+<section id="shared-links" style="margin: 30px 0;">
+<h2>🔗 Shared Resources</h2>
+<div class="links-section">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+        <h3>Useful Links</h3>
+        <button class="add-activity-btn" onclick="addLink()">+ Add Link</button>
+    </div>
+    <div id="linksList"></div>
+</div>
+</section>
+
+<!-- SHARED PACKING LIST -->
+<section id="packing-list" style="margin: 30px 0;">
+<h2>🎒 Shared Packing List</h2>
+<div class="packing-shared">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+        <h3>Who's Bringing What?</h3>
+        <button class="add-activity-btn" onclick="addPackingItem()">+ Add Item</button>
+    </div>
+    <div id="packingListContent"></div>
+</div>
+</section>
+
+<section id="planner">
+<h2>👥 Group Planning</h2>
+
+<div class="user-selector">
+    <h3>Who are you?</h3>
+    <p style="color: #666; margin-bottom: 15px;">Select your name to add or edit activities</p>
+    <div class="user-buttons">
+        <button class="user-btn" data-user="dewitt">DeWitt</button>
+        <button class="user-btn" data-user="christine">Christine</button>
+        <button class="user-btn" data-user="dani">Dani</button>
+        <button class="user-btn" data-user="kimothy">Kimothy</button>
+    </div>
+</div>
+
+
+<div class="news-section" id="newsSection">
+    <div class="news-header">
+        📰 Latest Updates
+    </div>
+    <div class="news-items" id="newsItems">
+        <div class="news-empty">No recent updates yet. Start planning to see activity here!</div>
+    </div>
+</div>
+
+<div class="tip-box">
+    <strong>💡 How this works:</strong>
+    <ul style="margin-top: 10px;">
+        <li>Select your name above</li>
+        <li>Click "<strong>Edit</strong>" on existing activities to modify them</li>
+        <li>Click "<strong>+ Add Activity</strong>" to add new plans</li>
+        <li>Mark who's joining each activity</li>
+        <li><strong>Refresh the page</strong> to see updates from others</li>
+    </ul>
+</div>
+
+<div id="days-container"></div>
+</section>
+
+<section id="budget">
+<h2>💰 Budget Overview</h2>
+
+<div class="budget-grid">
+    <div class="budget-card">
+        <h3>Hotels</h3>
+        <div class="budget-amount">$5,108</div>
+        <div class="budget-note">13 nights total</div>
+    </div>
+    <div class="budget-card">
+        <h3>Activities</h3>
+        <div class="budget-amount">$1,050</div>
+        <div class="budget-note">Per person</div>
+    </div>
+    <div class="budget-card">
+        <h3>Food</h3>
+        <div class="budget-amount">$1,400-2,100</div>
+        <div class="budget-note">Per person</div>
+    </div>
+    <div class="budget-card">
+        <h3>Per Person</h3>
+        <div class="budget-amount">~$3,300-4,950</div>
+        <div class="budget-note">Excl. hotel</div>
+    </div>
+</div>
+</section>
+
+<section id="weather">
+<h2>🌤️ Weather & Packing</h2>
+
+<h3>Expected Weather (March 4-17)</h3>
+<div class="budget-grid">
+    <div class="budget-card">
+        <h3>🗼 Tokyo</h3>
+        <div class="budget-amount" style="font-size: 1.5rem;">43-55°F</div>
+        <div class="budget-note">Cool, some rain</div>
+    </div>
+    <div class="budget-card">
+        <h3>⛩️ Kyoto</h3>
+        <div class="budget-amount" style="font-size: 1.5rem;">39-55°F</div>
+        <div class="budget-note">Cold mornings</div>
+    </div>
+    <div class="budget-card">
+        <h3>🏯 Osaka</h3>
+        <div class="budget-amount" style="font-size: 1.5rem;">43-57°F</div>
+        <div class="budget-note">Slightly warmer</div>
+    </div>
+    <div class="budget-card">
+        <h3>🗻 Hakone</h3>
+        <div class="budget-amount" style="font-size: 1.5rem;">37-54°F</div>
+        <div class="budget-note">Cooler, mountains</div>
+    </div>
+</div>
+
+
+<div class="news-section" id="newsSection">
+    <div class="news-header">
+        📰 Latest Updates
+    </div>
+    <div class="news-items" id="newsItems">
+        <div class="news-empty">No recent updates yet. Start planning to see activity here!</div>
+    </div>
+</div>
+
+<div class="tip-box">
+    <strong>Pack layers</strong> - cold mornings (5-10°C), mild afternoons (15-20°C). Early cherry blossoms possible late March!
+</div>
+
+<h3>🎒 Packing Essentials</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+    <div class="info-box">
+        <h4>👕 Clothing</h4>
+        <ul>
+            <li>Medium jacket</li>
+            <li>Rain jacket</li>
+            <li>3-4 long-sleeves</li>
+            <li>2-3 short-sleeves</li>
+            <li>2 pants/jeans</li>
+            <li>Warm sweater</li>
+            <li>Scarf</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <h4>👟 Footwear</h4>
+        <ul>
+            <li>Walking shoes (broken in!)</li>
+            <li>Slip-on shoes</li>
+            <li>Good socks</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <h4>🎒 Accessories</h4>
+        <ul>
+            <li>Compact umbrella</li>
+            <li>Day backpack</li>
+            <li>Sunglasses</li>
+            <li>Water bottle</li>
+            <li>Power bank</li>
+            <li>Travel adapter</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <h4>💊 Health</h4>
+        <ul>
+            <li>Allergy meds (pollen!)</li>
+            <li>Face masks</li>
+            <li>Hand sanitizer</li>
+            <li>Prescriptions</li>
+            <li>First aid kit</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <h4>📱 Tech</h4>
+        <ul>
+            <li>Passport</li>
+            <li>Phone & charger</li>
+            <li>Headphones</li>
+            <li>Credit cards + cash</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <h4>🌸 Japan Specific</h4>
+        <ul>
+            <li>Small towel (onsen)</li>
+            <li>Cash (yen)</li>
+            <li>JR Pass voucher</li>
+            <li>Coin purse</li>
+            <li>Zip-lock bags</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<section id="hotels">
+<h2>🏨 Hotels</h2>
+<table>
+<tr><th>Dates</th><th>Hotel</th><th>Cost</th></tr>
+<tr><td>Mar 4-7</td><td><a href="https://www.shibaparkhotel.com/en/" target="_blank">Shiba Park Hotel, Tokyo</a></td><td>$1,465</td></tr>
+<tr><td>Mar 8-11</td><td><a href="https://www.granvia-kyoto.co.jp/english/" target="_blank">Hotel Granvia Kyoto</a></td><td>$1,829</td></tr>
+<tr><td>Mar 12-13</td><td><a href="https://www.zentisosaka.com/" target="_blank">Zentis Osaka</a></td><td>$342</td></tr>
+<tr><td>Mar 14-15</td><td><a href="https://www.kowakien.com/ten-yu/en/" target="_blank">Hakone Kowakien TEN-YU</a></td><td>$1,077</td></tr>
+<tr><td>Mar 16</td><td><a href="https://www.hotel-groove.com/shinjuku/" target="_blank">Hotel Groove Shinjuku</a></td><td>$395</td></tr>
+<tr><th colspan="2">TOTAL</th><th>$5,108</th></tr>
+</table>
+</section>
+
+<section id="tips">
+<h2>💡 Essential Tips</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+    <div class="info-box">
+        <h4>🚆 Transportation</h4>
+        <ul>
+            <li>Buy JR Pass BEFORE arriving</li>
+            <li>Get Suica card at airport</li>
+            <li>Download offline maps</li>
+            <li>Last trains ~midnight</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <h4>💴 Money</h4>
+        <ul>
+            <li>Bring cash - many places cash-only</li>
+            <li>7-Eleven ATMs work</li>
+            <li>Daily: $100-150/person</li>
+            <li>NO TIPPING!</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <h4>🍜 Food</h4>
+        <ul>
+            <li>Top restaurants: book 1-3 months ahead</li>
+            <li>Breakfast: 7-Eleven $2-5</li>
+            <li>Lunch: cheapest meal $10-20</li>
+            <li>Dinner: $30-150+</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <h4>🎌 Culture</h4>
+        <ul>
+            <li>Remove shoes at temples/ryokans</li>
+            <li>Quiet on trains</li>
+            <li>Carry trash until you find bin</li>
+            <li>Bow when saying thanks</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+
+<!-- RUNNING ROUTES SECTION -->
+<section id="running-routes">
+<h2>🏃 Morning Running Routes</h2>
+
+<div class="run-box">
+    <h3>🗼 Tokyo - Shiba Park & Tokyo Tower Loop</h3>
+    <p><strong>Distance:</strong> 5 km (3 miles) | <strong>Time:</strong> 25-30 minutes</p>
+    <ul>
+        <li><strong>Start:</strong> Right outside Shiba Park Hotel!</li>
+        <li><strong>Route:</strong> Loop through Shiba Park → Zojoji Temple (walk, don't run!) → Around Tokyo Tower → Back</li>
+        <li><strong>Best time:</strong> 6:00-7:00 AM (quiet, cool, sunrise behind Tokyo Tower!)</li>
+        <li><strong>Perfect for:</strong> Jet lag recovery!</li>
+        <li><strong>Features:</strong> 200+ cherry blossom trees, Tokyo Tower views, peaceful park</li>
+        <li><strong>Important:</strong> Walk (don't run) through Zojoji Temple grounds - it's respectful!</li>
+    </ul>
+    <a href="https://www.google.com/maps/place/Shiba+Park" class="btn-link" target="_blank">View Route Map</a>
+</div>
+
+<div class="run-box">
+    <h3>⛩️ Kyoto - Kamo River Path</h3>
+    <p><strong>Distance:</strong> 3-6 km (adjustable!) | <strong>Time:</strong> 20-45 minutes</p>
+    <ul>
+        <li><strong>Start:</strong> 5 min walk east from hotel to Kamo River</li>
+        <li><strong>Route:</strong> Run along beautiful riverside paths - choose your distance!</li>
+        <li><strong>North route:</strong> Toward Demachiyanagi (quieter, more scenic)</li>
+        <li><strong>South route:</strong> Toward Gion District (more interesting, pass under bridges)</li>
+        <li><strong>Best time:</strong> 6:00-7:00 AM (locals doing Tai Chi, peaceful!)</li>
+        <li><strong>Perfect for:</strong> Kyoto's #1 signature running route!</li>
+        <li><strong>Features:</strong> Beautiful riverside, picturesque bridges, can run as far as you want (30km of paths)</li>
+    </ul>
+    <a href="https://www.google.com/maps/search/Kamo+River+Kyoto" class="btn-link" target="_blank">View Route Map</a>
+</div>
+
+<div class="run-box">
+    <h3>🏯 Osaka - Nakanoshima Island Loop</h3>
+    <p><strong>Distance:</strong> 3-6 km (Zentis Hotel's Official Route!) | <strong>Time:</strong> 20-40 minutes</p>
+    <ul>
+        <li><strong>Start:</strong> Right at hotel entrance!</li>
+        <li><strong>Route:</strong> Cross Nakanoshima Garden Bridge → Run east along Dojima River → Through Nakanoshima Park → Eastern tip fountain (sunrise!) → Return</li>
+        <li><strong>Short loop:</strong> To fountain & back = 3 km (20 min)</li>
+        <li><strong>Extended loop:</strong> Continue to Tenma Bridge = 6 km (40 min)</li>
+        <li><strong>Best time:</strong> 6:00-7:00 AM (catch sunrise at fountain!)</li>
+        <li><strong>Perfect for:</strong> "Aqua Metropolis" running - water city views!</li>
+        <li><strong>Features:</strong> Pedestrian bridge, modern buildings + historic architecture, parks, sunrise fountain spot</li>
+        <li><strong>Fun fact:</strong> Zentis Hotel's General Manager runs this route himself!</li>
+    </ul>
+    <a href="https://www.google.com/maps/search/Nakanoshima+Park+Osaka" class="btn-link" target="_blank">View Route Map</a>
+</div>
+
+<div class="tip-box">
+    <strong>💡 Running Tips for Japan:</strong>
+    <ul style="margin-top: 10px;">
+        <li>Bring a headlamp - some areas are dark in early morning</li>
+        <li>Convenience stores (7-Eleven, Lawson) are everywhere for water/bathroom</li>
+        <li>Most parks/temples open at sunrise (around 6 AM)</li>
+        <li>Download offline maps in case you get lost</li>
+        <li>Wear bright colors - cyclists are common on these routes</li>
+    </ul>
+</div>
+</section>
+
+<!-- NIGHTLIFE GUIDE SECTION -->
+<section id="nightlife-guide">
+<h2>🌃 Complete Nightlife Guide</h2>
+
+<div class="nightlife-section">
+    <h3>🗼 Tokyo Nightlife</h3>
+    <p style="margin-bottom: 15px;">Tokyo has some of the world's best clubs! Most open 10 PM-5 AM. No sandals/shorts. Bring passport ID.</p>
+    
+    <div class="club-grid">
+        <div class="club-card">
+            <div class="club-name">WOMB</div>
+            <div class="club-details">📍 Shibuya • 🎵 House/Techno</div>
+            <div class="club-details">💰 ¥2,500-3,500</div>
+            <div class="club-details" style="margin-top: 8px;">#47 worldwide! Skip weekdays - Saturdays best. 4-floor mega club.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Address:</strong> 2-16 Maruyamacho, Shibuya</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">ZOUK Tokyo</div>
+            <div class="club-details">📍 Ginza • 🎵 EDM/House</div>
+            <div class="club-details">💰 ¥3,000-4,000</div>
+            <div class="club-details" style="margin-top: 8px;">#1 in Asia! Newest super club. Singapore import. Massive sound system.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Address:</strong> HULIC & New GINZA 8, B2F-B3F</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">TK Shibuya</div>
+            <div class="club-details">📍 Shibuya • 🎵 EDM/Hip-Hop</div>
+            <div class="club-details">💰 ¥2,500-3,500</div>
+            <div class="club-details" style="margin-top: 8px;">1,000 capacity - biggest single floor in Tokyo. Mix of tourists and locals.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Address:</strong> 2-11 Dogenzaka, Shibuya</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">1OAK Tokyo</div>
+            <div class="club-details">📍 Roppongi • 🎵 Hip-Hop/R&B</div>
+            <div class="club-details">💰 ¥3,500-5,000</div>
+            <div class="club-details" style="margin-top: 8px;">NYC club - upscale, celebrity sightings. Dress well. VIP tables available.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Address:</strong> Grand Hyatt Tokyo, B1F</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">V2 Tokyo</div>
+            <div class="club-details">📍 Roppongi • 🎵 Various</div>
+            <div class="club-details">💰 ¥2,500-4,000</div>
+            <div class="club-details" style="margin-top: 8px;">Panoramic city views. Famous 3 AM pizza shop inside. Rooftop terrace.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Address:</strong> 7-14-4 Roppongi, Minato</div>
+        </div>
+    </div>
+    
+    <div class="tip-box" style="margin-top: 20px; background: rgba(255,255,255,0.1); border-color: #ffd700;">
+        <strong>💡 Tokyo Club Tips:</strong>
+        <ul style="margin-top: 10px;">
+            <li>Pre-drink at izakayas to save money (drinks are expensive inside)</li>
+            <li>Taxi Shibuya→Roppongi ~¥1,000 (~$7)</li>
+            <li>Last train is around midnight - plan to stay out or taxi home</li>
+            <li>Some clubs have "ladies free before midnight" promotions</li>
+            <li>Golden Gai (tiny bars) is great for pre-club drinks</li>
+        </ul>
+    </div>
+</div>
+
+<div class="nightlife-section">
+    <h3>⛩️ Kyoto Nightlife</h3>
+    <p style="margin-bottom: 15px;">Kyoto is quieter than Tokyo/Osaka. Most places close by 1 AM. More intimate, local vibe.</p>
+    
+    <div class="club-grid">
+        <div class="club-card">
+            <div class="club-name">Butterfly</div>
+            <div class="club-details">📍 Kiyamachi • 🎵 Hip-Hop</div>
+            <div class="club-details">💰 Cheap! (¥1,500-2,000)</div>
+            <div class="club-details" style="margin-top: 8px;">Best club in Kyoto. Small but energetic. University crowd. Friendly vibe.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Address:</strong> Kiyamachi Street area</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">The Roots if all evil</div>
+            <div class="club-details">📍 Near Station • 🎵 Gin Bar</div>
+            <div class="club-details">💰 ¥800 per drink</div>
+            <div class="club-details" style="margin-top: 8px;">Intimate, 8 seats only. Craft gin specialists. Perfect pre-club spot.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Vibe:</strong> Sophisticated, quiet conversations</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">Kiyamachi Street</div>
+            <div class="club-details">📍 Central Kyoto • 🎵 Various</div>
+            <div class="club-details">💰 ¥500-1,000 per bar</div>
+            <div class="club-details" style="margin-top: 8px;">Bar crawl area! Canal-side drinking. University students. Cheap and fun.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Plan:</strong> Hop between 3-4 small bars</div>
+        </div>
+    </div>
+    
+    <div class="tip-box" style="margin-top: 20px; background: rgba(255,255,255,0.1); border-color: #ffd700;">
+        <strong>💡 Kyoto Nightlife Tips:</strong>
+        <ul style="margin-top: 10px;">
+            <li>Most places close at 1 AM - start earlier than in Tokyo</li>
+            <li>Pontocho Alley (parallel to Kiyamachi) has traditional izakayas</li>
+            <li>Many bars are "locals only" - stick to tourist-friendly areas</li>
+            <li>Gion area is beautiful at night but very quiet (geisha district)</li>
+        </ul>
+    </div>
+</div>
+
+<div class="nightlife-section">
+    <h3>🏯 Osaka Nightlife</h3>
+    <p style="margin-bottom: 15px;">Osaka is cheaper and more fun than Tokyo! Very foreigner-friendly. Party atmosphere.</p>
+    
+    <div class="club-grid">
+        <div class="club-card">
+            <div class="club-name">Club Joule</div>
+            <div class="club-details">📍 Shinsaibashi • 🎵 EDM/Hip-Hop</div>
+            <div class="club-details">💰 ¥2,500-3,500</div>
+            <div class="club-details" style="margin-top: 8px;">800 capacity, 3 floors. Best club in Osaka. International DJs. Great sound.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Address:</strong> 2-2-9 Nishi-Shinsaibashi, Chuo-ku</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">Amerikamura (Amemura)</div>
+            <div class="club-details">📍 Youth District • 🎵 Alternative/Underground</div>
+            <div class="club-details">💰 Varies (¥1,000-3,000)</div>
+            <div class="club-details" style="margin-top: 8px;">Osaka's Shibuya! Multiple small clubs. Street fashion. Young crowd. Skate culture.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Vibe:</strong> Alternative, indie, hip-hop</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">Dotonbori Bars</div>
+            <div class="club-details">📍 Outside Your Hotel! • 🎵 Izakayas/Karaoke</div>
+            <div class="club-details">💰 ¥500-1,000</div>
+            <div class="club-details" style="margin-top: 8px;">Steps from Zentis Hotel! Cheap drinks, karaoke boxes, street food. Can't go wrong.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Must-do:</strong> Bar hop along the canal!</div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-name">Ghost Ultra Lounge</div>
+            <div class="club-details">📍 Shinsaibashi • 🎵 Hip-Hop/R&B</div>
+            <div class="club-details">💰 ¥2,000-3,000</div>
+            <div class="club-details" style="margin-top: 8px;">Upscale vibe. VIP booths. Good for groups. International crowd.</div>
+            <div class="club-details" style="margin-top: 5px;"><strong>Dress code:</strong> Smart casual</div>
+        </div>
+    </div>
+    
+    <div class="tip-box" style="margin-top: 20px; background: rgba(255,255,255,0.1); border-color: #ffd700;">
+        <strong>💡 Osaka Nightlife Tips:</strong>
+        <ul style="margin-top: 10px;">
+            <li>Osaka is MUCH cheaper than Tokyo - drinks are ¥500-800 vs ¥1,000-1,500</li>
+            <li>People are friendlier and more outgoing than Tokyo/Kyoto</li>
+            <li>Dotonbori at night is INSANE - neon everywhere, must experience</li>
+            <li>Izakayas open late - perfect for post-club food (ramen, takoyaki)</li>
+            <li>Try "tachinomi" (standing bars) - super cheap and local</li>
+        </ul>
+    </div>
+</div>
+
+<div class="highlight" style="margin-top: 30px;">
+    <h4>🎉 General Japan Nightlife Survival Guide</h4>
+    <ul>
+        <li><strong>Dress Code:</strong> No sandals, no shorts, no sportswear. Clubs are strict!</li>
+        <li><strong>ID:</strong> ALWAYS bring passport (bouncers card everyone)</li>
+        <li><strong>Cash:</strong> Many clubs are cash-only for entry</li>
+        <li><strong>Smoking:</strong> Still allowed in many bars/clubs (be prepared)</li>
+        <li><strong>Cover Charge:</strong> Usually includes 1-2 drinks</li>
+        <li><strong>Re-entry:</strong> Usually not allowed once you leave</li>
+        <li><strong>Last Train:</strong> Around midnight - stay out or taxi (¥2,000-4,000 to hotels)</li>
+        <li><strong>Safety:</strong> Japan is VERY safe, even drunk at 4 AM</li>
+        <li><strong>Language:</strong> Bartenders usually speak some English in clubs</li>
+        <li><strong>Tipping:</strong> NEVER tip (it's rude!)</li>
+    </ul>
+</div>
+</section>
+
+<div style="text-align: center; background: var(--primary); color: white; padding: 40px 20px; margin: 40px -20px -20px -20px; border-radius: 8px;">
+    <div style="font-size: 4rem;">🇯🇵</div>
+    <h2 style="color: white; border: none; margin: 20px 0;">Safe Travels!</h2>
+    <p style="font-size: 1.2rem;">いってらっしゃい</p>
+    <p>DeWitt, Christine, Dani & Kimothy | March 4-17, 2026</p>
+</div>
+
+<!-- MODAL -->
+<div id="activityModal" class="modal">
+    <div class="modal-content">
+        <h3 style="color: var(--primary); margin-bottom: 20px;" id="modalTitle">Add Activity</h3>
+        <form id="activityForm">
+            <input type="hidden" id="editDayIndex">
+            <input type="hidden" id="editActivityIndex">
+            
+            <div class="form-group">
+                <label>Time:</label>
+                <input type="time" id="activityTime" required>
+            </div>
+            <div class="form-group">
+                <label>Activity Name:</label>
+                <input type="text" id="activityName" placeholder="e.g., Vintage Shopping in Harajuku" required>
+            </div>
+            <div class="form-group">
+                <label>Details (optional):</label>
+                <textarea id="activityDetails" placeholder="e.g., Meeting at KINJI store, budget ¥5000"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Cost (optional):</label>
+                <input type="text" id="activityCost" placeholder="e.g., $50-100">
+            </div>
+            <div class="form-group">
+                <label>Who's joining?</label>
+                <div class="attendee-checkboxes">
+                    <label><input type="checkbox" value="dewitt"> DeWitt</label>
+                    <label><input type="checkbox" value="christine"> Christine</label>
+                    <label><input type="checkbox" value="dani"> Dani</label>
+                    <label><input type="checkbox" value="kimothy"> Kimothy</label>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveBtn">Save Activity</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// Complete trip data with all content
+const tripDays = [
+    {
+        date: "March 4", day: "Wednesday", title: "Tokyo - Arrival & Onsen", city: "tokyo",
+        hotel: { name: "Shiba Park Hotel", near: "Tokyo Tower (5 min walk)", stations: "Onarimon (2 min), Daimon (5 min)", map: "https://www.google.com/maps/place/Shiba+Park+Hotel,+Tokyo" },
+        run: { title: "Shiba Park & Tokyo Tower Loop - 5 km", details: ["Start: Right outside hotel!", "Route: Shiba Park → Zojoji Temple → Tokyo Tower → Back", "Time: 25-30 minutes", "Best: 6-7 AM (200+ cherry blossoms!)", "Walk through temple grounds!"], map: "https://www.google.com/maps/place/Shiba+Park" },
+        landmarks: [
+            {name: "Tokyo Tower", url: "https://www.google.com/maps/place/Tokyo+Tower"},
+            {name: "Imperial Palace", url: "https://www.google.com/maps/place/Imperial+Palace+Tokyo"},
+            {name: "Meiji Shrine", url: "https://www.google.com/maps/place/Meiji+Shrine"}
+        ],
+        activities: [
+            {time: "15:20", name: "Arrive Haneda Airport", cost: "-", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "17:00", name: "Check-in Shiba Park Hotel", cost: "-", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "19:00", name: "Onsen (Toyosu or Spa LaQua)", cost: "$35", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ],
+        restaurants: [
+            {name: "Tofu-ya Ukai", type: "Traditional Tofu Kaiseki", desc: "10 min walk from hotel! Beautiful traditional house. RESERVE AHEAD!", price: "$80-150", url: "https://www.ukai.co.jp/english/shiba/"},
+            {name: "Local Izakaya", type: "Casual Japanese Pub", desc: "Multiple options around Daimon/Hamamatsucho. Perfect for jet lag!", price: "$30-50"}
+        ]
+    },
+    {
+        date: "March 5", day: "Thursday", title: "Tokyo - Imperial Palace & Tsukiji", city: "tokyo",
+        activities: [
+            {time: "10:00", name: "Imperial Palace East Gardens", cost: "Free", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "11:00", name: "Tsukiji Sushi Making Class (4 hrs)", cost: "$146", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "16:00", name: "Ginza Art Aquarium", cost: "$17", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 6", day: "Friday", title: "Tokyo - Harajuku Vintage Shopping", city: "tokyo",
+        activities: [
+            {time: "10:00", name: "Meiji Shrine", cost: "Free", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "12:00", name: "Harajuku Vintage Shopping (KINJI, Chicago, Flamingo)", cost: "Shopping", details: "Most shops open 11 AM-12 PM", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "19:00", name: "Shinjuku Bar Hopping Tour (food included!)", cost: "$114", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 7", day: "Saturday", title: "Tokyo - Sumo & TeamLab", city: "tokyo",
+        activities: [
+            {time: "12:00", name: "Asakusa Sumo Club (BOOKED!)", cost: "-", details: "Watch training, chanko nabe lunch, Q&A", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "14:30", name: "TeamLab Planets", cost: "$30", details: "Bring shorts - you walk through water! Go barefoot.", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 8", day: "Sunday", title: "Kyoto - Travel Day", city: "kyoto",
+        hotel: { name: "Hotel Granvia Kyoto", near: "INSIDE Kyoto Station!", map: "https://www.google.com/maps/place/Hotel+Granvia+Kyoto" },
+        run: { title: "Kamo River Path - 3-6 km (adjustable!)", details: ["Start: 5 min walk east from hotel", "Run along riverside paths - choose your distance!", "Best: 6-7 AM (locals doing Tai Chi!)", "Kyoto's #1 signature run!"], map: "https://www.google.com/maps/search/Kamo+River+Kyoto" },
+        activities: [
+            {time: "11:00", name: "Shinkansen to Kyoto", cost: "~$90", details: "★ BOOK E SEATS FOR MT. FUJI VIEW! ★", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 9", day: "Monday", title: "Kyoto - Nijo Castle & Gion", city: "kyoto",
+        activities: [
+            {time: "10:00", name: "Nijo Castle", cost: "$6", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "11:30", name: "Nishiki Market lunch", cost: "$15-30", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "15:00", name: "Gion District", cost: "Free", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 10", day: "Tuesday", title: "Kyoto - Arashiyama", city: "kyoto",
+        activities: [
+            {time: "09:00", name: "Bamboo Grove (go early!)", cost: "Free", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "11:00", name: "Monkey Park (hike 30min)", cost: "$10", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 11", day: "Wednesday", title: "Kyoto - Fushimi Inari", city: "kyoto",
+        activities: [
+            {time: "08:00", name: "Fushimi Inari (EARLY!)", cost: "Free", details: "10,000 orange gates!", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "12:00", name: "Sake district lunch", cost: "$20-40", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "19:00", name: "Bar Hopping Tour", cost: "$113", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 12", day: "Thursday", title: "Osaka - Classic Osaka", city: "osaka",
+        hotel: { name: "Zentis Osaka", near: "Dotonbori area - heart of food scene!", map: "https://www.google.com/maps/place/Zentis+Osaka" },
+        run: { title: "Nakanoshima Loop - 3-6 km (Hotel's Route!)", details: ["Start: Right at hotel entrance!", "Hotel's official route - GM runs this himself!", "Best: 6-7 AM (sunrise at fountain!)", "Aqua Metropolis views!"], map: "https://www.google.com/maps/search/Nakanoshima+Park+Osaka" },
+        activities: [
+            {time: "13:30", name: "Osaka Castle", cost: "$10-15", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "15:00", name: "Kuromon Market - fresh seafood!", cost: "$20-40", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "19:00", name: "Dotonbori (Glico Man!)", cost: "-", details: "Street food hopping!", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 13", day: "Friday", title: "Osaka - DECISION DAY", city: "osaka",
+        activities: [
+            {time: "09:00", name: "DECISION: Naoshima Art Island OR Cultural Osaka Day", cost: "$175 or $100", details: "Option A: Art Island (full day, exhausting) | Option B: Cultural Osaka (relaxed, more food!)", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 14", day: "Saturday", title: "Hakone - Ryokan & Onsen", city: "hakone",
+        hotel: { name: "Hakone Kowakien TEN-YU", near: "Includes kaiseki dinners & breakfast!", map: "https://www.google.com/maps/place/Hakone+Kowakien+TEN-YU" },
+        activities: [
+            {time: "11:00", name: "Travel to Hakone", cost: "$80", details: "Shinkansen to Odawara + Hakone Pass", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "18:30", name: "Kaiseki Dinner & Onsen", cost: "Included", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 15", day: "Sunday", title: "Hakone - Loop Tour", city: "hakone",
+        activities: [
+            {time: "11:00", name: "Hakone Loop (Ropeway, Owakudani, Lake Ashi, Hakone Shrine)", cost: "$45", details: "Try black eggs at Owakudani!", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 16", day: "Monday", title: "Tokyo - Return & Shopping", city: "tokyo",
+        hotel: { name: "Hotel Groove Shinjuku", near: "Near Shinjuku Station", map: "https://www.hotel-groove.com/shinjuku/" },
+        activities: [
+            {time: "11:59", name: "Romancecar to Shinjuku (scenic!)", cost: "$17", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "14:30", name: "Shopping in Shinjuku", cost: "-", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "19:00", name: "Final dinner!", cost: "$60-150", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    },
+    {
+        date: "March 17", day: "Tuesday", title: "St. Patrick's Day & Departure", city: "tokyo",
+        activities: [
+            {time: "12:30", name: "🍀 Irish Pub Lunch! (Dubliners', An Sólás, or Paddy's Junction)", cost: "$20-40", details: "WEAR GREEN! Guinness, whiskey, fish & chips", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]},
+            {time: "17:20", name: "Depart Haneda 🇯🇵✈️", cost: "-", details: "Sayonara!", isOriginal: true, attendees: ["dewitt", "christine", "dani", "kimothy"]}
+        ]
+    }
+];
+
+const nightlifeData = {
+    tokyo: [
+        {name: "WOMB", area: "Shibuya", music: "House/Techno", cost: "¥2,500-3,500", note: "#47 worldwide! Skip weekdays - Saturdays best"},
+        {name: "ZOUK Tokyo", area: "Ginza", music: "EDM/House", cost: "¥3,000-4,000", note: "#1 in Asia! Newest super club"},
+        {name: "TK Shibuya", area: "Shibuya", music: "EDM/Hip-Hop", cost: "¥2,500-3,500", note: "1,000 capacity - biggest single floor"},
+        {name: "1OAK", area: "Roppongi", music: "Hip-Hop/R&B", cost: "¥3,500-5,000", note: "NYC club - upscale, celebrity sightings"}
+    ],
+    kyoto: [
+        {name: "Butterfly", area: "Kiyamachi", music: "Hip-Hop", cost: "Cheap!", note: "Best club in Kyoto"},
+        {name: "The Roots if all evil", area: "Near Station", music: "Gin Bar", cost: "¥800", note: "Intimate, 8 seats only"},
+        {name: "Kiyamachi Street", area: "Central", music: "Various", cost: "¥500-1,000", note: "Bar crawl area - uni students"}
+    ],
+    osaka: [
+        {name: "Club Joule", area: "Shinsaibashi", music: "EDM/Hip-Hop", cost: "¥2,500-3,500", note: "800 capacity, 3 floors"},
+        {name: "Amerikamura", area: "Youth District", music: "Alternative", cost: "Varies", note: "Underground scene - Osaka's Shibuya"},
+        {name: "Dotonbori Bars", area: "Outside Hotel!", music: "Izakayas", cost: "¥500-1,000", note: "Steps from Zentis!"}
+    ],
+    hakone: []
+};
+
+// State
+let currentUser = null;
+let currentDay = null;
+let editMode = false;
+let editDayIndex = null;
+let editActivityIndex = null;
+// ===== FIREBASE SETUP =====
+const firebaseConfig = {
+    apiKey: "AIzaSyD5CAkL5b6uTsDyipp87id8MsdLLNdEUTQ",
+    authDomain: "japan-trip-2026-b5a99.firebaseapp.com",
+    databaseURL: "https://japan-trip-2026-b5a99-default-rtdb.firebaseio.com",
+    projectId: "japan-trip-2026-b5a99",
+    storageBucket: "japan-trip-2026-b5a99.firebasestorage.app",
+    messagingSenderId: "896411303992",
+    appId: "1:896411303992:web:d0569946d55d4f1b64e6cd"
+};
+
+let db = null;
+let tripRef = null;
+let firebaseReady = false;
+
+try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.database();
+    tripRef = db.ref("japanTrip2026");
+    firebaseReady = true;
+} catch(e) {
+    console.error("Firebase init failed:", e);
+}
+
+function saveToFirebase() {
+    if (!tripRef) return;
+    tripRef.set({
+        customActivities,
+        originalOverrides,
+        votes,
+        comments,
+        sharedLinks,
+        packingList,
+        activityFeed,
+        restaurantSuggestions,
+        restaurantVotes
+    }).catch(err => console.error("Firebase save error:", err));
+}
+
+// ===== STATE =====
+let customActivities = {};
+let originalOverrides = {};
+let votes = {};
+let comments = {};
+let photos = JSON.parse(localStorage.getItem("japanPhotos")) || {};
+let sharedLinks = [];
+let packingList = [];
+let activityFeed = [];
+let restaurantSuggestions = {};
+let restaurantVotes = {};
+let currentView = "list";
+let showMap = false;
+
+// Initialize
+document.addEventListener("DOMContentLoaded", () => {
+    setupEventListeners();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    updateNotificationBadge();
+
+    if (firebaseReady && tripRef) {
+        // Show loading state
+        document.getElementById("days-container").innerHTML =
+            '<div style="text-align:center;padding:40px;color:#999;font-style:italic;">🔥 Loading trip data...</div>';
+
+        // Real-time Firebase listener - fires immediately on load, then on every change
+        tripRef.on("value", (snapshot) => {
+            const data = snapshot.val() || {};
+            customActivities = data.customActivities || {};
+            originalOverrides = data.originalOverrides || {};
+            votes = data.votes || {};
+            comments = data.comments || {};
+            sharedLinks = Array.isArray(data.sharedLinks) ? data.sharedLinks : Object.values(data.sharedLinks || {});
+            packingList = Array.isArray(data.packingList) ? data.packingList : Object.values(data.packingList || {});
+            activityFeed = Array.isArray(data.activityFeed) ? data.activityFeed : Object.values(data.activityFeed || {});
+            restaurantSuggestions = data.restaurantSuggestions || {};
+            restaurantVotes = data.restaurantVotes || {};
+
+            renderDays();
+            updateFeed();
+            updateNewsSection();
+            renderLinks();
+            renderPackingList();
+        }, (error) => {
+            console.error("Firebase error:", error);
+            document.getElementById("days-container").innerHTML =
+                '<div style="text-align:center;padding:40px;color:#cc0000;">⚠️ Could not connect to Firebase. Check database rules are set to test mode.</div>';
+        });
+    } else {
+        // Firebase unavailable - render with empty state
+        renderDays();
+        updateFeed();
+        updateNewsSection();
+        renderLinks();
+        renderPackingList();
+    }
+
+    // Wire up new buttons
+    document.getElementById("feedToggle")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        toggleFeed();
+    });
+    
+    document.getElementById("notificationBell")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        toggleNotifications();
+    });
+    
+    document.getElementById("mapToggle")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        toggleMap();
+    });
+    
+    document.getElementById("exportCalendar")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        exportToCalendar();
+    });
+    
+    // Close notifications when clicking outside
+    document.addEventListener("click", (e) => {
+        const panel = document.getElementById("notificationsPanel");
+        const bell = document.getElementById("notificationBell");
+        if (panel && !panel.contains(e.target) && !bell.contains(e.target)) {
+            panel.classList.remove("active");
+        }
+    });
+});
+
+function setupEventListeners() {
+    document.querySelectorAll(".user-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".user-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentUser = btn.dataset.user;
+        });
+    });
+    
+    document.getElementById("cancelBtn").addEventListener("click", closeModal);
+    document.getElementById("activityForm").addEventListener("submit", handleSaveActivity);
+    document.getElementById("activityModal").addEventListener("click", (e) => {
+        if (e.target.id === "activityModal") closeModal();
+    });
+}
+
+function renderDays() {
+    const container = document.getElementById("days-container");
+    container.innerHTML = "";
+    
+    tripDays.forEach((day, dayIndex) => {
+        // Apply any saved overrides to the original activities before spreading
+        const baseActivities = day.activities.map((act, origIdx) => {
+            const overrideKey = `${dayIndex}-${origIdx}`;
+            return originalOverrides[overrideKey]
+                ? { ...originalOverrides[overrideKey], isOriginal: true }
+                : { ...act };
+        });
+        const allActivities = [...baseActivities];
+        
+        // Add custom activities
+        if (customActivities[dayIndex]) {
+            customActivities[dayIndex].forEach(act => {
+                allActivities.push({...act, isOriginal: false});
+            });
+        }
+        
+        // Sort by time
+        allActivities.sort((a, b) => a.time.localeCompare(b.time));
+        
+        const daySection = document.createElement("div");
+        daySection.className = "day-section";
+        daySection.id = day.city;
+        
+        let cityImageHTML = "";
+        if (false) /* City images disabled - prevents file load errors */ {
+            cityImageHTML = `<img src="${'${images[day.city]}'}" alt="${day.city}" class="city-header-img" onerror="this.style.display='none'">`;
+        }
+        
+        let nightlifeHTML = "";
+        if (nightlifeData[day.city] && nightlifeData[day.city].length > 0 && 
+            (dayIndex === 0 || tripDays[dayIndex-1].city !== day.city)) {
+            nightlifeHTML = `
+                <div class="nightlife-section">
+                    <h3>🌃 ${day.city.charAt(0).toUpperCase() + day.city.slice(1)} Nightlife</h3>
+                    <div class="club-grid">
+                        ${nightlifeData[day.city].map(club => `
+                            <div class="club-card">
+                                <div class="club-name">${club.name}</div>
+                                <div class="club-details">📍 ${club.area} • 🎵 ${club.music}</div>
+                                <div class="club-details">💰 ${club.cost}</div>
+                                <div class="club-details" style="margin-top: 8px;">${club.note}</div>
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            `;
+        }
+        
+        let hotelHTML = "";
+        if (day.hotel) {
+            hotelHTML = `
+                <div class="info-box">
+                    <h4>📍 ${day.hotel.name}</h4>
+                    <p>${day.hotel.near}</p>
+                    ${day.hotel.stations ? `<p><strong>Stations:</strong> ${day.hotel.stations}</p>` : ""}
+                    <a href="${day.hotel.map}" class="btn-link" target="_blank">Open in Google Maps</a>
+                </div>
+            `;
+        }
+        
+        let runHTML = "";
+        // Running routes moved to bottom section
+        
+        let landmarksHTML = "";
+        if (day.landmarks) {
+            landmarksHTML = `
+                <h4>🏯 Landmarks</h4>
+                <div class="landmark-links">
+                    ${day.landmarks.map(l => `<a href="${l.url}" target="_blank">${l.name}</a>`).join("")}
+                </div>
+            `;
+        }
+        
+        let restaurantsHTML = "";
+        if (day.restaurants) {
+            restaurantsHTML = `<h4>🍽️ Restaurant Recommendations</h4>`;
+            day.restaurants.forEach(r => {
+                restaurantsHTML += `
+                    <div class="restaurant-card">
+                        <h4>${r.name}</h4>
+                        <p class="subtitle-text">${r.type}</p>
+                        <p>${r.desc}</p>
+                        <p class="price">${r.price}</p>
+                        ${r.url ? `<a href="${r.url}" class="btn-link" target="_blank">Reserve</a>` : ""}
+                    </div>
+                `;
+            });
+        }
+        
+        daySection.innerHTML = `
+            ${cityImageHTML}
+            
+            <div class="day-header">
+                <div>
+                    <h3 class="day-title">${day.date} - ${day.title}</h3>
+                    <div style="color: #666;">${day.day}</div>
+                </div>
+                <button class="add-activity-btn" data-day="${dayIndex}">+ Add Activity</button>
+            </div>
+            
+            ${hotelHTML}
+            
+            ${landmarksHTML}
+            
+            <h4>Schedule:</h4>
+            <div class="activity-list">
+                ${allActivities.map((act, actIndex) => renderActivity(act, dayIndex, actIndex, allActivities)).join("")}
+            </div>
+            
+            ${restaurantsHTML}
+            
+            ${renderRestaurantSuggestions(dayIndex)}
+            
+            ${renderPhotos(dayIndex)}
+        `;
+        
+        container.appendChild(daySection);
+        daySection.querySelector(".add-activity-btn").addEventListener("click", () => openModal(dayIndex));
+        
+        // Load weather for this day
+        renderWeatherWidget(dayIndex);
+    });
+}
+
+function renderActivity(act, dayIndex, actIndex, allActivities) {
+    const cardClass = act.isOriginal ? "activity-card original-activity" : "activity-card custom-activity";
+    
+    return `
+        <div class="${cardClass}" data-day-index="${dayIndex}" data-activity-index="${actIndex}">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div class="activity-time">${formatTime(act.time)}</div>
+                <button class="edit-btn" onclick="editActivity(${dayIndex}, ${actIndex})">Edit</button>
+            </div>
+            <div class="activity-title">${act.name}</div>
+            ${act.details ? `<div class="activity-details">${act.details}</div>` : ""}
+            ${act.cost ? `<div class="activity-details">💰 ${act.cost}</div>` : ""}
+            <div style="margin-top: 10px;">
+                ${act.attendees.map(user => `<span class="attendee-tag ${user}">${getUserDisplayName(user)}</span>`).join("")}
+            </div>
+            ${act.addedBy ? `<div class="added-by">Added by ${getUserDisplayName(act.addedBy)}</div>` : ""}
+            
+            ${renderVoting(dayIndex, actIndex)}
+            ${renderComments(dayIndex, actIndex)}
+            
+            ${!act.isOriginal ? `
+                <div class="activity-actions">
+                    <button class="delete-btn" onclick="deleteActivity(${dayIndex}, ${actIndex})">Delete</button>
+                </div>
+            ` : ""}
+        </div>
+    `;
+}
+
+function openModal(dayIndex, activity = null, activityIndex = null) {
+    if (!currentUser) {
+        alert("Please select your name first!");
+        return;
+    }
+    
+    currentDay = dayIndex;
+    editMode = activity !== null;
+    editActivityIndex = activityIndex;
+    
+    const modal = document.getElementById("activityModal");
+    const form = document.getElementById("activityForm");
+    
+    document.getElementById("modalTitle").textContent = editMode ? "Edit Activity" : "Add Activity";
+    document.getElementById("saveBtn").textContent = editMode ? "Save Changes" : "Add Activity";
+    
+    if (editMode && activity) {
+        document.getElementById("activityTime").value = activity.time;
+        document.getElementById("activityName").value = activity.name;
+        document.getElementById("activityDetails").value = activity.details || "";
+        document.getElementById("activityCost").value = activity.cost || "";
+        
+        document.querySelectorAll(".attendee-checkboxes input").forEach(cb => {
+            cb.checked = activity.attendees.includes(cb.value);
+        });
+    } else {
+        form.reset();
+    }
+    
+    modal.classList.add("active");
+}
+
+function closeModal() {
+    document.getElementById("activityModal").classList.remove("active");
+    editMode = false;
+    currentDay = null;
+    editActivityIndex = null;
+}
+
+function handleSaveActivity(e) {
+    e.preventDefault();
+    
+    const attendees = Array.from(document.querySelectorAll(".attendee-checkboxes input:checked")).map(cb => cb.value);
+    if (attendees.length === 0) {
+        alert("Please select at least one person joining!");
+        return;
+    }
+    
+    const activity = {
+        time: document.getElementById("activityTime").value,
+        name: document.getElementById("activityName").value,
+        details: document.getElementById("activityDetails").value,
+        cost: document.getElementById("activityCost").value,
+        attendees,
+        addedBy: currentUser,
+        timestamp: Date.now()
+    };
+    
+    if (editMode && editDayIndex !== null && editActivityIndex !== null) {
+        // Reconstruct sorted activities (same logic as renderDays)
+        const baseActivities = tripDays[editDayIndex].activities.map((act, origIdx) => {
+            const overrideKey = `${editDayIndex}-${origIdx}`;
+            return originalOverrides[overrideKey]
+                ? { ...originalOverrides[overrideKey], isOriginal: true }
+                : { ...act };
+        });
+        const allActivities = [...baseActivities];
+        if (customActivities[editDayIndex]) {
+            customActivities[editDayIndex].forEach(act => {
+                allActivities.push({...act, isOriginal: false});
+            });
+        }
+        allActivities.sort((a, b) => a.time.localeCompare(b.time));
+        
+        // Find if this is an original or custom activity
+        const originalActivity = allActivities[editActivityIndex];
+        
+        if (originalActivity.isOriginal) {
+            // Find the original activity's index in the unsorted list
+            const originalIndex = tripDays[editDayIndex].activities.findIndex(
+                a => a.time === originalActivity.time && a.name === originalActivity.name
+            );
+            if (originalIndex !== -1) {
+                // Save the override to localStorage instead of mutating the in-memory constant
+                const overrideKey = `${editDayIndex}-${originalIndex}`;
+                originalOverrides[overrideKey] = { ...activity, isOriginal: true };
+                saveToFirebase();
+            }
+        } else {
+            // Find custom activity
+            if (!customActivities[editDayIndex]) customActivities[editDayIndex] = [];
+            const customIndex = customActivities[editDayIndex].findIndex(
+                a => a.time === originalActivity.time && a.name === originalActivity.name && a.timestamp === originalActivity.timestamp
+            );
+            if (customIndex !== -1) {
+                customActivities[editDayIndex][customIndex] = activity;
+            }
+        }
+    } else {
+        // Add new activity
+        if (!customActivities[currentDay]) customActivities[currentDay] = [];
+        customActivities[currentDay].push(activity);
+    }
+    
+    saveToFirebase();
+    renderDays();
+    closeModal();
+}
+
+function editActivity(dayIndex, activityIndex) {
+    if (!currentUser) {
+        alert("Please select your name first!");
+        return;
+    }
+    
+    // Reconstruct allActivities for this day (same logic as renderDays)
+    const baseActivities = tripDays[dayIndex].activities.map((act, origIdx) => {
+        const overrideKey = `${dayIndex}-${origIdx}`;
+        return originalOverrides[overrideKey]
+            ? { ...originalOverrides[overrideKey], isOriginal: true }
+            : { ...act };
+    });
+    const allActivities = [...baseActivities];
+    if (customActivities[dayIndex]) {
+        customActivities[dayIndex].forEach(act => {
+            allActivities.push({...act, isOriginal: false});
+        });
+    }
+    allActivities.sort((a, b) => a.time.localeCompare(b.time));
+    
+    const activity = allActivities[activityIndex];
+    editDayIndex = dayIndex;
+    editActivityIndex = activityIndex;
+    openModal(dayIndex, activity, activityIndex);
+}
+
+function deleteActivity(dayIndex, activityIndex) {
+    if (confirm("Delete this activity?")) {
+        // Reconstruct the sorted allActivities to find which item this is
+        const baseActivities = tripDays[dayIndex].activities.map((act, origIdx) => {
+            const overrideKey = `${dayIndex}-${origIdx}`;
+            return originalOverrides[overrideKey]
+                ? { ...originalOverrides[overrideKey], isOriginal: true }
+                : { ...act };
+        });
+        const allActivities = [...baseActivities];
+        if (customActivities[dayIndex]) {
+            customActivities[dayIndex].forEach(act => {
+                allActivities.push({...act, isOriginal: false});
+            });
+        }
+        allActivities.sort((a, b) => a.time.localeCompare(b.time));
+        
+        const target = allActivities[activityIndex];
+        if (target && !target.isOriginal && customActivities[dayIndex]) {
+            const customIndex = customActivities[dayIndex].findIndex(
+                a => a.time === target.time && a.name === target.name && a.timestamp === target.timestamp
+            );
+            if (customIndex !== -1) {
+                customActivities[dayIndex].splice(customIndex, 1);
+                saveToFirebase();
+                renderDays();
+            }
+        }
+    }
+}
+
+function formatTime(time) {
+    const [hours, minutes] = time.split(":");
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? "PM" : "AM";
+    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+    return `${displayHour}:${minutes} ${ampm}`;
+}
+
+
+// ===== COUNTDOWN TIMER =====
+function updateCountdown() {
+    const tripDate = new Date("2026-03-04T15:20:00");
+    const now = new Date();
+    const diff = tripDate - now;
+    
+    if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+        document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+        document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+    }
+}
+
+// ===== VOTING SYSTEM =====
+function voteActivity(dayIndex, activityIndex, voteType) {
+    if (!currentUser) {
+        alert("Please select your name first!");
+        return;
+    }
+    
+    const key = `${dayIndex}-${activityIndex}`;
+    if (!votes[key]) votes[key] = {};
+    
+    // Toggle vote
+    if (votes[key][currentUser] === voteType) {
+        delete votes[key][currentUser];
+    } else {
+        votes[key][currentUser] = voteType;
+    }
+    
+    saveToFirebase();
+    addToFeed(`${getUserDisplayName(currentUser)} ${voteType === "up" ? "👍" : "👎"} an activity`);
+    renderDays();
+}
+
+function getVoteCounts(dayIndex, activityIndex) {
+    const key = `${dayIndex}-${activityIndex}`;
+    const activityVotes = votes[key] || {};
+    
+    let upvotes = 0;
+    let downvotes = 0;
+    let userVote = null;
+    
+    Object.entries(activityVotes).forEach(([user, vote]) => {
+        if (vote === "up") upvotes++;
+        else if (vote === "down") downvotes++;
+        if (user === currentUser) userVote = vote;
+    });
+    
+    return { upvotes, downvotes, userVote };
+}
+
+function renderVoting(dayIndex, activityIndex) {
+    const { upvotes, downvotes, userVote } = getVoteCounts(dayIndex, activityIndex);
+    
+    return `
+        <div class="voting-section">
+            <span style="font-weight: bold; color: #666;">Votes:</span>
+            <div class="vote-buttons">
+                <button class="vote-btn ${userVote === "up" ? "voted" : ""}" onclick="voteActivity(${dayIndex}, ${activityIndex}, 'up')">
+                    👍 <span class="vote-count">${upvotes}</span>
+                </button>
+                <button class="vote-btn ${userVote === "down" ? "voted" : ""}" onclick="voteActivity(${dayIndex}, ${activityIndex}, 'down')">
+                    👎 <span class="vote-count">${downvotes}</span>
+                </button>
+            </div>
+            <span style="color: #666; font-size: 0.9rem;">${upvotes + downvotes}/4 voted</span>
+        </div>
+    `;
+}
+
+// ===== COMMENTS SYSTEM =====
+function toggleComments(dayIndex, activityIndex) {
+    const id = `comments-${dayIndex}-${activityIndex}`;
+    const section = document.getElementById(id);
+    if (section) {
+        section.classList.toggle("active");
+    }
+}
+
+function addComment(dayIndex, activityIndex) {
+    if (!currentUser) {
+        alert("Please select your name first!");
+        return;
+    }
+    
+    const inputId = `comment-input-${dayIndex}-${activityIndex}`;
+    const input = document.getElementById(inputId);
+    const text = input.value.trim();
+    
+    if (!text) return;
+    
+    const key = `${dayIndex}-${activityIndex}`;
+    if (!comments[key]) comments[key] = [];
+    
+    comments[key].push({
+        user: currentUser,
+        text: text,
+        timestamp: Date.now()
+    });
+    
+    saveToFirebase();
+    addToFeed(`${getUserDisplayName(currentUser)} commented on an activity`);
+    input.value = "";
+    renderDays();
+}
+
+function renderComments(dayIndex, activityIndex) {
+    const key = `${dayIndex}-${activityIndex}`;
+    const activityComments = comments[key] || [];
+    
+    const commentsHTML = activityComments.map(comment => `
+        <div class="comment">
+            <div class="comment-header">
+                <span class="comment-author ${comment.user}">${getUserDisplayName(comment.user)}</span>
+                <span class="comment-time">${formatTimestamp(comment.timestamp)}</span>
+            </div>
+            <div class="comment-text">${comment.text}</div>
+        </div>
+    `).join("");
+    
+    return `
+        <button class="comments-toggle" onclick="toggleComments(${dayIndex}, ${activityIndex})">
+            💬 Comments (${activityComments.length})
+        </button>
+        <div class="comments-section" id="comments-${dayIndex}-${activityIndex}">
+            ${commentsHTML}
+            <div class="comment-form">
+                <input type="text" class="comment-input" id="comment-input-${dayIndex}-${activityIndex}" placeholder="Add a comment...">
+                <button class="comment-submit" onclick="addComment(${dayIndex}, ${activityIndex})">Post</button>
+            </div>
+        </div>
+    `;
+}
+
+// ===== PHOTO UPLOAD =====
+function uploadPhoto(dayIndex) {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                if (!photos[dayIndex]) photos[dayIndex] = [];
+                photos[dayIndex].push({
+                    data: event.target.result,
+                    user: currentUser,
+                    timestamp: Date.now()
+                });
+                localStorage.setItem("japanPhotos", JSON.stringify(photos));
+                addToFeed(`${getUserDisplayName(currentUser)} added a photo`);
+                renderDays();
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    input.click();
+}
+
+function deletePhoto(dayIndex, photoIndex) {
+    if (confirm("Delete this photo?")) {
+        photos[dayIndex].splice(photoIndex, 1);
+        localStorage.setItem("japanPhotos", JSON.stringify(photos));
+        renderDays();
+    }
+}
+
+function renderPhotos(dayIndex) {
+    const dayPhotos = photos[dayIndex] || [];
+    if (dayPhotos.length === 0 && !currentUser) return "";
+    
+    const photosHTML = dayPhotos.map((photo, idx) => `
+        <div class="photo-item">
+            <img src="${photo.data}" alt="Trip photo">
+            ${currentUser ? `<button class="photo-delete" onclick="deletePhoto(${dayIndex}, ${idx})">×</button>` : ""}
+        </div>
+    `).join("");
+    
+    return `
+        <div class="photo-section">
+            <h4>📸 Photos</h4>
+            ${currentUser ? `<button class="photo-upload-btn" onclick="uploadPhoto(${dayIndex})">📷 Add Photo</button>` : ""}
+            <div class="photo-gallery">${photosHTML}</div>
+        </div>
+    `;
+}
+
+// ===== ACTIVITY FEED =====
+function addToFeed(message) {
+    activityFeed.unshift({
+        message: message,
+        timestamp: Date.now()
+    });
+    
+    // Keep only last 20 items
+    if (activityFeed.length > 20) {
+        activityFeed = activityFeed.slice(0, 20);
+    }
+    
+    saveToFirebase();
+    updateFeed();
+    updateNewsSection();
+    addNotification(message);
+}
+
+function updateFeed() {
+    const feedContent = document.getElementById("feedContent");
+    if (!feedContent) return;
+    
+    feedContent.innerHTML = activityFeed.map(item => `
+        <div class="feed-item">
+            ${item.message}
+            <div class="feed-time">${formatTimestamp(item.timestamp)}</div>
+        </div>
+    `).join("") || '<div style="color: #999; text-align: center; padding: 20px;">No recent activity</div>';
+}
+
+function toggleFeed() {
+    const feed = document.getElementById("activityFeed");
+    if (feed.style.display === "none") {
+        feed.style.display = "block";
+    } else {
+        feed.style.display = "none";
+    }
+}
+
+// ===== NOTIFICATIONS =====
+let notifications = JSON.parse(localStorage.getItem("japanNotifications")) || []; // Stays local (per-user read status)
+
+function addNotification(message) {
+    notifications.unshift({
+        message: message,
+        timestamp: Date.now(),
+        read: false
+    });
+    
+    if (notifications.length > 50) {
+        notifications = notifications.slice(0, 50);
+    }
+    
+    localStorage.setItem("japanNotifications", JSON.stringify(notifications));
+    updateNotificationBadge();
+}
+
+function updateNotificationBadge() {
+    const unread = notifications.filter(n => !n.read).length;
+    const badge = document.getElementById("notificationCount");
+    if (badge) {
+        if (unread > 0) {
+            badge.textContent = unread;
+            badge.style.display = "flex";
+        } else {
+            badge.style.display = "none";
+        }
+    }
+}
+
+function toggleNotifications() {
+    const panel = document.getElementById("notificationsPanel");
+    panel.classList.toggle("active");
+    
+    if (panel.classList.contains("active")) {
+        // Mark all as read
+        notifications.forEach(n => n.read = true);
+        localStorage.setItem("japanNotifications", JSON.stringify(notifications));
+        updateNotificationBadge();
+        
+        // Render notifications
+        const list = document.getElementById("notificationsList");
+        list.innerHTML = notifications.map(n => `
+            <div class="notification-item">
+                ${n.message}
+                <div class="notification-time">${formatTimestamp(n.timestamp)}</div>
+            </div>
+        `).join("") || '<div style="padding: 20px; text-align: center; color: #999;">No notifications</div>';
+    }
+}
+
+// ===== SHARED LINKS =====
+function addLink() {
+    const url = prompt("Enter URL:");
+    if (!url) return;
+    
+    const title = prompt("Enter title:");
+    if (!title) return;
+    
+    const category = prompt("Category (Restaurants/Hotels/Activities/Transport/Other):");
+    
+    sharedLinks.push({
+        url: url,
+        title: title,
+        category: category || "Other",
+        user: currentUser,
+        timestamp: Date.now()
+    });
+    
+    saveToFirebase();
+    addToFeed(`${getUserDisplayName(currentUser)} added a link: ${title}`);
+    renderLinks();
+}
+
+function deleteLink(index) {
+    if (confirm("Delete this link?")) {
+        sharedLinks.splice(index, 1);
+        saveToFirebase();
+        renderLinks();
+    }
+}
+
+function renderLinks() {
+    const container = document.getElementById("linksList");
+    if (!container) return;
+    
+    if (sharedLinks.length === 0) {
+        container.innerHTML = '<div style="color: #999; text-align: center; padding: 20px;">No links yet. Click "+ Add Link" to share resources!</div>';
+        return;
+    }
+    
+    container.innerHTML = sharedLinks.map((link, idx) => renderLinkPreview(link, idx)).join("");
+}
+
+// ===== PACKING LIST =====
+function addPackingItem() {
+    if (!currentUser) {
+        alert("Please select your name first!");
+        return;
+    }
+    
+    const item = prompt("What are you bringing?");
+    if (!item) return;
+    
+    packingList.push({
+        item: item,
+        user: currentUser,
+        packed: false
+    });
+    
+    saveToFirebase();
+    addToFeed(`${getUserDisplayName(currentUser)} added "${item}" to packing list`);
+    renderPackingList();
+}
+
+function togglePacked(index) {
+    packingList[index].packed = !packingList[index].packed;
+    saveToFirebase();
+    renderPackingList();
+}
+
+function deletePackingItem(index) {
+    if (confirm("Remove this item?")) {
+        packingList.splice(index, 1);
+        saveToFirebase();
+        renderPackingList();
+    }
+}
+
+function renderPackingList() {
+    const container = document.getElementById("packingListContent");
+    if (!container) return;
+    
+    container.innerHTML = packingList.map((item, idx) => `
+        <div class="packing-item" style="${item.packed ? 'opacity: 0.6; text-decoration: line-through;' : ''}">
+            <div style="display: flex; align-items: center;">
+                <input type="checkbox" class="packing-checkbox" ${item.packed ? 'checked' : ''} onchange="togglePacked(${idx})">
+                <span>${item.item}</span>
+            </div>
+            <div>
+                <span class="packing-owner ${item.user}">${getUserDisplayName(item.user)}</span>
+                ${currentUser ? `<button class="delete-btn" style="margin-left: 10px;" onclick="deletePackingItem(${idx})">×</button>` : ""}
+            </div>
+        </div>
+    `).join("") || '<div style="color: #999; text-align: center; padding: 20px;">No items yet. Click "+ Add Item" to coordinate packing!</div>';
+}
+
+// ===== CALENDAR EXPORT =====
+function exportToCalendar() {
+    let icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Japan Trip 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Japan Trip 2026
+X-WR-TIMEZONE:Asia/Tokyo
+`;
+
+    tripDays.forEach(day => {
+        const allActivities = [...day.activities];
+        if (customActivities[tripDays.indexOf(day)]) {
+            allActivities.push(...customActivities[tripDays.indexOf(day)]);
+        }
+        
+        allActivities.forEach(act => {
+            if (!currentUser || act.attendees.includes(currentUser)) {
+                const dateStr = day.date.replace("March ", "2026-03-");
+                const [hours, minutes] = act.time.split(":");
+                const startDateTime = `${dateStr}T${hours}:${minutes}:00`;
+                
+                icsContent += `BEGIN:VEVENT
+UID:${Date.now()}-${Math.random()}@japantrip.com
+DTSTART:${startDateTime.replace(/[-:]/g, "")}
+SUMMARY:${act.name}
+DESCRIPTION:${act.details || ""}
+LOCATION:Japan
+END:VEVENT
+`;
+            }
+        });
+    });
+
+    icsContent += "END:VCALENDAR";
+    
+    const blob = new Blob([icsContent], { type: "text/calendar" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `japan-trip-${currentUser || "all"}.ics`;
+    link.click();
+    
+    addToFeed(`${getUserDisplayName(currentUser || "Someone")} exported calendar`);
+}
+
+// ===== MAP VIEW =====
+function toggleMap() {
+    showMap = !showMap;
+    const container = document.getElementById("mapContainer");
+    if (showMap) {
+        container.classList.add("active");
+        initMap();
+    } else {
+        container.classList.remove("active");
+    }
+}
+
+function initMap() {
+    // Simple map implementation using embedded Google Maps
+    const mapDiv = document.getElementById("map");
+    mapDiv.innerHTML = `
+        <iframe width="100%" height="100%" frameborder="0" style="border:0" 
+        src="https://www.google.com/maps/d/embed?mid=1YSrx1lgPu0irywnqAy6VLMEbNBxLr9U" allowfullscreen>
+        </iframe>
+        <div style="padding: 20px; text-align: center; background: #f5f5f5;">
+            <p>📍 Interactive map coming soon!</p>
+            <p style="font-size: 0.9rem; color: #666;">For now, use the Google Maps links in each day's section</p>
+        </div>
+    `;
+}
+
+// ===== OFFLINE MODE =====
+window.addEventListener("online", () => {
+    document.getElementById("offlineBanner").classList.remove("active");
+});
+
+window.addEventListener("offline", () => {
+    document.getElementById("offlineBanner").classList.add("active");
+});
+
+// ===== DRAG AND DROP =====
+let draggedElement = null;
+let draggedDayIndex = null;
+let draggedActivityIndex = null;
+
+function makeDraggable() {
+    document.querySelectorAll(".activity-card").forEach(card => {
+        card.draggable = true;
+        
+        card.addEventListener("dragstart", (e) => {
+            draggedElement = card;
+            card.classList.add("dragging");
+            
+            // Store indices from data attributes
+            draggedDayIndex = parseInt(card.dataset.dayIndex);
+            draggedActivityIndex = parseInt(card.dataset.activityIndex);
+        });
+        
+        card.addEventListener("dragend", () => {
+            card.classList.remove("dragging");
+            draggedElement = null;
+        });
+        
+        card.addEventListener("dragover", (e) => {
+            e.preventDefault();
+        });
+        
+        card.addEventListener("drop", (e) => {
+            e.preventDefault();
+            // Drag and drop reordering logic would go here
+            // For now, just log
+            console.log("Dropped");
+        });
+    });
+}
+
+// ===== UTILITY FUNCTIONS =====
+function formatTimestamp(timestamp) {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diff = now - date;
+    
+    if (diff < 60000) return "Just now";
+    if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+    if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+    return `${Math.floor(diff / 86400000)}d ago`;
+}
+
+// Update the renderActivity function to include new features
+
+
+
+// ===== INTERACTIVE DAILY MAPS =====
+function toggleDayMap(dayIndex) {
+    const mapId = `day-map-${dayIndex}`;
+    const mapContainer = document.getElementById(mapId);
+    
+    if (!mapContainer) return;
+    
+    if (mapContainer.style.display === "none" || !mapContainer.style.display) {
+        mapContainer.style.display = "block";
+        loadDayMap(dayIndex);
+    } else {
+        mapContainer.style.display = "none";
+    }
+}
+
+// Your custom Google My Maps ID
+const GOOGLE_MY_MAPS_ID = "1YSrx1lgPu0irywnqAy6VLMEbNBxLr9U";
+
+// IMPORTANT: Make sure your Google My Maps is set to "Anyone with the link can view"
+// Go to your map → Share → Change from "Private" to "Anyone with the link"
+
+function loadDayMap(dayIndex) {
+    const day = tripDays[dayIndex];
+    const mapId = `day-map-${dayIndex}`;
+    const mapContainer = document.getElementById(mapId);
+    
+    if (!mapContainer) return;
+    
+    // Get all activities for this day
+    const allActivities = [...day.activities];
+    if (customActivities[dayIndex]) {
+        allActivities.push(...customActivities[dayIndex]);
+    }
+    
+    const cityData = {
+        tokyo: { name: "Tokyo", icon: "🗼" },
+        kyoto: { name: "Kyoto", icon: "⛩️" },
+        osaka: { name: "Osaka", icon: "🏯" },
+        hakone: { name: "Hakone", icon: "🗻" }
+    };
+    
+    const cityInfo = cityData[day.city] || cityData.tokyo;
+    
+    // Use the working embed URL (Test 1 format)
+    const customMapUrl = `https://www.google.com/maps/d/embed?mid=${GOOGLE_MY_MAPS_ID}`;
+    
+    // Beautiful map preview card instead of problematic iframe
+    mapContainer.innerHTML = `
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px; text-align: center; color: white; box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);">
+            <div style="font-size: 4rem; margin-bottom: 20px;">🗺️</div>
+            <h3 style="margin: 0 0 10px 0; font-size: 1.8rem; color: white;">
+                ${cityInfo.icon} Complete Japan Trip Map
+            </h3>
+            <p style="font-size: 1.1rem; margin: 15px 0; opacity: 0.95;">
+                All hotels, activities, running routes & nightlife<br>
+                <strong>${allActivities.length} activities</strong> planned for this day
+            </p>
+            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin: 20px 0; backdrop-filter: blur(10px);">
+                <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
+                    ✨ 31+ locations mapped<br>
+                    📍 Interactive Google My Maps<br>
+                    📱 Works on mobile & desktop
+                </p>
+            </div>
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
+                <a href="https://www.google.com/maps/d/viewer?mid=${GOOGLE_MY_MAPS_ID}" 
+                   target="_blank" 
+                   class="btn-link" 
+                   style="background: white; color: var(--primary); border-color: white; font-size: 1.1rem; padding: 15px 30px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    🗺️ OPEN TRIP MAP
+                </a>
+                <button onclick="generateMapUpdateCSV(${dayIndex})" 
+                        class="btn-link" 
+                        style="background: #4CAF50; color: white; border-color: #4CAF50; font-size: 1.1rem; padding: 15px 30px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    📥 Export New Activities
+                </button>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.8; font-style: italic;">
+                Map opens in new tab with full Google Maps features
+            </p>
+        </div>
+    `;
+}
+
+// Function to generate CSV for new activities that can be imported to Google My Maps
+function generateMapUpdateCSV(dayIndex = null) {
+    const newLocations = [];
+    
+    // Collect all custom activities
+    Object.keys(customActivities).forEach(dayIdx => {
+        if (dayIndex !== null && parseInt(dayIdx) !== dayIndex) return;
+        
+        const day = tripDays[parseInt(dayIdx)];
+        customActivities[dayIdx].forEach(activity => {
+            newLocations.push({
+                Name: activity.name,
+                Description: `${day.date} | ${activity.details || ''} | ${activity.cost || ''}`,
+                Category: 'Custom Activity',
+                City: day.city.charAt(0).toUpperCase() + day.city.slice(1),
+                Day: day.date,
+                Notes: `Added by ${getUserDisplayName(activity.addedBy)}`
+            });
+        });
+    });
+    
+    // Collect all restaurant suggestions
+    Object.keys(restaurantSuggestions).forEach(key => {
+        const [dayIdx, mealType] = key.split('-');
+        if (dayIndex !== null && parseInt(dayIdx) !== dayIndex) return;
+        
+        const day = tripDays[parseInt(dayIdx)];
+        restaurantSuggestions[key].forEach(restaurant => {
+            newLocations.push({
+                Name: restaurant.name,
+                Description: `${day.date} | ${mealType.toUpperCase()} | ${restaurant.cuisine} | ${restaurant.priceRange}`,
+                Category: 'Restaurant',
+                City: day.city.charAt(0).toUpperCase() + day.city.slice(1),
+                Day: day.date,
+                Notes: `${restaurant.notes} | Suggested by ${getUserDisplayName(restaurant.suggestedBy)}`
+            });
+        });
+    });
+    
+    if (newLocations.length === 0) {
+        alert("No new activities or restaurants to export yet! Add some activities or restaurant suggestions first.");
+        return;
+    }
+    
+    // Generate CSV
+    let csv = "Name,Description,Category,City,Day,Notes\n";
+    newLocations.forEach(loc => {
+        csv += `"${loc.Name}","${loc.Description}","${loc.Category}","${loc.City}","${loc.Day}","${loc.Notes}"\n`;
+    });
+    
+    // Download CSV
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `Japan_Trip_New_Locations_${dayIndex !== null ? tripDays[dayIndex].date.replace(' ', '_') : 'All'}.csv`;
+    link.click();
+    
+    // Show instructions
+    alert(`✅ Downloaded CSV with ${newLocations.length} new location(s)!\n\nTo add to your Google My Maps:\n1. Open your map: https://www.google.com/maps/d/edit?mid=${GOOGLE_MY_MAPS_ID}\n2. Click "Add layer"\n3. Click "Import"\n4. Upload the CSV file you just downloaded\n5. Select columns as before (Name for title)\n6. Done! Your new activities appear on the map!`);
+}
+
+// ===== LIVE WEATHER INTEGRATION =====
+async function fetchWeatherForCity(city, date) {
+    // Using Open-Meteo API (free, no key required)
+    const cityCoords = {
+        tokyo: { lat: 35.6762, lon: 139.6503 },
+        kyoto: { lat: 35.0116, lon: 135.7681 },
+        osaka: { lat: 34.6937, lon: 135.5023 },
+        hakone: { lat: 35.2324, lon: 139.1069 }
+    };
+    
+    const coords = cityCoords[city];
+    if (!coords) return null;
+    
+    try {
+        const response = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Asia/Tokyo&forecast_days=14`
+        );
+        
+        if (!response.ok) throw new Error("Weather fetch failed");
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Weather error:", error);
+        return null;
+    }
+}
+
+function getWeatherIcon(code) {
+    // WMO Weather codes to emoji
+    const icons = {
+        0: "☀️", 1: "🌤️", 2: "⛅", 3: "☁️",
+        45: "🌫️", 48: "🌫️",
+        51: "🌦️", 53: "🌦️", 55: "🌧️",
+        61: "🌧️", 63: "🌧️", 65: "🌧️",
+        71: "🌨️", 73: "🌨️", 75: "🌨️",
+        80: "🌦️", 81: "🌧️", 82: "⛈️",
+        95: "⛈️", 96: "⛈️", 99: "⛈️"
+    };
+    return icons[code] || "🌤️";
+}
+
+function getWeatherDescription(code) {
+    const descriptions = {
+        0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+        45: "Foggy", 48: "Foggy",
+        51: "Light drizzle", 53: "Drizzle", 55: "Heavy drizzle",
+        61: "Light rain", 63: "Rain", 65: "Heavy rain",
+        71: "Light snow", 73: "Snow", 75: "Heavy snow",
+        80: "Light showers", 81: "Showers", 82: "Heavy showers",
+        95: "Thunderstorm", 96: "Thunderstorm", 99: "Severe thunderstorm"
+    };
+    return descriptions[code] || "Partly cloudy";
+}
+
+async function renderWeatherWidget(dayIndex) {
+    const day = tripDays[dayIndex];
+    const widgetId = `weather-widget-${dayIndex}`;
+    const widget = document.getElementById(widgetId);
+    
+    if (!widget) return;
+    
+    widget.innerHTML = '<div class="weather-loading">Loading weather data...</div>';
+    
+    const weatherData = await fetchWeatherForCity(day.city, day.date);
+    
+    if (!weatherData) {
+        widget.innerHTML = `
+            <div class="weather-loading">
+                Weather data unavailable. Expected: ${getStaticWeather(day.city)}
+            </div>
+        `;
+        return;
+    }
+    
+    // Find the day index in weather data (simplified - would need better date matching)
+    const dayNum = parseInt(day.date.split(" ")[1]) - 4; // Days since March 4
+    
+    if (dayNum >= 0 && dayNum < weatherData.daily.temperature_2m_max.length) {
+        const maxTemp = weatherData.daily.temperature_2m_max[dayNum];
+        const minTemp = weatherData.daily.temperature_2m_min[dayNum];
+        const weatherCode = weatherData.daily.weathercode[dayNum];
+        const precipProb = weatherData.daily.precipitation_probability_max[dayNum];
+        
+        widget.innerHTML = `
+            <h4 style="margin: 0 0 15px 0; color: white;">Weather for ${day.date}</h4>
+            <div class="weather-current">
+                <div>
+                    <div class="weather-icon">${getWeatherIcon(weatherCode)}</div>
+                    <div style="font-size: 1.2rem; margin-top: 10px;">${getWeatherDescription(weatherCode)}</div>
+                </div>
+                <div class="weather-temp">
+                    <div>
+                        <div style="font-size: 0.8rem; opacity: 0.9;">High / Low</div>
+                        ${Math.round(maxTemp)}°C / ${Math.round(minTemp)}°C
+                    </div>
+                </div>
+            </div>
+            <div class="weather-details">
+                <div class="weather-detail">
+                    <div class="weather-label">Rain Chance</div>
+                    <div class="weather-value">${precipProb}%</div>
+                </div>
+                <div class="weather-detail">
+                    <div class="weather-label">In Fahrenheit</div>
+                    <div class="weather-value">${Math.round(maxTemp * 9/5 + 32)}°F / ${Math.round(minTemp * 9/5 + 32)}°F</div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+function getStaticWeather(city) {
+    const weather = {
+        tokyo: "43-55°F (6-13°C)",
+        kyoto: "39-55°F (4-13°C)",
+        osaka: "43-57°F (6-14°C)",
+        hakone: "37-54°F (3-12°C)"
+    };
+    return weather[city] || "Check forecast";
+}
+
+// ===== SMART LINK PREVIEW =====
+async function fetchLinkPreview(url) {
+    // This would normally use a backend service or API
+    // For now, we'll create a simplified version
+    try {
+        // In production, you'd use something like:
+        // const response = await fetch(`https://api.linkpreview.net/?key=YOUR_KEY&q=${url}`);
+        
+        // For now, extract basic info from URL
+        const urlObj = new URL(url);
+        return {
+            title: urlObj.hostname.replace('www.', ''),
+            description: url,
+            image: null,
+            url: url
+        };
+    } catch (error) {
+        return {
+            title: "Link",
+            description: url,
+            image: null,
+            url: url
+        };
+    }
+}
+
+function renderLinkPreview(link, index) {
+    // Check if we have cached preview data
+    const previewKey = `preview-${link.url}`;
+    const cached = localStorage.getItem(previewKey);
+    
+    if (cached) {
+        const preview = JSON.parse(cached);
+        return createLinkPreviewHTML(preview, link, index);
+    }
+    
+    // Fetch preview asynchronously
+    fetchLinkPreview(link.url).then(preview => {
+        localStorage.setItem(previewKey, JSON.stringify(preview));
+        // Re-render links to show preview
+        renderLinks();
+    });
+    
+    // Return simple version while loading
+    return `
+        <div class="link-item">
+            <div>
+                <span class="link-category">${link.category}</span>
+                <a href="${link.url}" target="_blank" style="color: var(--primary); font-weight: bold;">${link.title}</a>
+                <div style="font-size: 0.85rem; color: #999;">Added by ${getUserDisplayName(link.user)}</div>
+            </div>
+            ${currentUser ? `<button class="delete-btn" onclick="deleteLink(${index})">Delete</button>` : ""}
+        </div>
+    `;
+}
+
+function createLinkPreviewHTML(preview, link, index) {
+    return `
+        <div class="link-preview">
+            ${preview.image ? `<img src="${preview.image}" class="link-preview-image" onerror="this.style.display='none'">` : ''}
+            <div class="link-preview-content">
+                <div>
+                    <div style="margin-bottom: 8px;">
+                        <span class="link-category">${link.category}</span>
+                    </div>
+                    <a href="${link.url}" target="_blank" style="text-decoration: none;">
+                        <div class="link-preview-title">${link.title}</div>
+                    </a>
+                    ${preview.description ? `<div class="link-preview-description">${preview.description}</div>` : ''}
+                    <div class="link-preview-url">${preview.url}</div>
+                    <div style="font-size: 0.85rem; color: #999; margin-top: 8px;">
+                        Added by ${getUserDisplayName(link.user)} • ${formatTimestamp(link.timestamp)}
+                    </div>
+                </div>
+                ${currentUser ? `<button class="delete-btn" onclick="deleteLink(${index})">Delete</button>` : ""}
+            </div>
+        </div>
+    `;
+}
+
+
+// ===== RESTAURANT SUGGESTIONS =====
+// restaurantSuggestions and restaurantVotes declared near top with other state vars
+
+
+function addRestaurantSuggestion(dayIndex, mealType) {
+    if (!currentUser) {
+        alert("Please select your name first!");
+        return;
+    }
+    
+    // Store context for the modal
+    window.currentRestaurantContext = { dayIndex, mealType };
+    
+    // Open the restaurant modal
+    document.getElementById('restaurantModal').classList.add('active');
+}
+
+function saveRestaurantSuggestion() {
+    const { dayIndex, mealType } = window.currentRestaurantContext;
+    
+    const name = document.getElementById('restaurantName').value.trim();
+    if (!name) {
+        alert("Please enter a restaurant name!");
+        return;
+    }
+    
+    const cuisine = document.getElementById('restaurantCuisine').value.trim();
+    const location = document.getElementById('restaurantLocation').value.trim();
+    const priceRange = document.getElementById('restaurantPrice').value.trim();
+    const notes = document.getElementById('restaurantNotes').value.trim();
+    const website = document.getElementById('restaurantWebsite').value.trim();
+    const reservationLink = document.getElementById('restaurantReservation').value.trim();
+    const phone = document.getElementById('restaurantPhone').value.trim();
+    const address = document.getElementById('restaurantAddress').value.trim();
+    
+    const key = `${dayIndex}-${mealType}`;
+    if (!restaurantSuggestions[key]) {
+        restaurantSuggestions[key] = [];
+    }
+    
+    restaurantSuggestions[key].push({
+        name: name,
+        cuisine: cuisine || "Restaurant",
+        location: location || "",
+        priceRange: priceRange || "",
+        notes: notes || "",
+        website: website || "",
+        reservationLink: reservationLink || "",
+        phone: phone || "",
+        address: address || "",
+        suggestedBy: currentUser,
+        timestamp: Date.now()
+    });
+    
+    saveToFirebase();
+    addToFeed(`${getUserDisplayName(currentUser)} suggested ${name} for ${mealType}`);
+    
+    // Close modal and reset form
+    closeRestaurantModal();
+    renderDays();
+}
+
+function closeRestaurantModal() {
+    document.getElementById('restaurantModal').classList.remove('active');
+    document.getElementById('restaurantForm').reset();
+    window.currentRestaurantContext = null;
+}
+
+function voteRestaurant(dayIndex, mealType, restaurantIndex, voteType) {
+    if (!currentUser) {
+        alert("Please select your name first!");
+        return;
+    }
+    
+    const key = `${dayIndex}-${mealType}-${restaurantIndex}`;
+    if (!restaurantVotes[key]) restaurantVotes[key] = {};
+    
+    // Toggle vote
+    if (restaurantVotes[key][currentUser] === voteType) {
+        delete restaurantVotes[key][currentUser];
+    } else {
+        restaurantVotes[key][currentUser] = voteType;
+    }
+    
+    saveToFirebase();
+    renderDays();
+}
+
+function getRestaurantVotes(dayIndex, mealType, restaurantIndex) {
+    const key = `${dayIndex}-${mealType}-${restaurantIndex}`;
+    const votes = restaurantVotes[key] || {};
+    
+    let upvotes = 0;
+    let downvotes = 0;
+    let userVote = null;
+    
+    Object.entries(votes).forEach(([user, vote]) => {
+        if (vote === "up") upvotes++;
+        else if (vote === "down") downvotes++;
+        if (user === currentUser) userVote = vote;
+    });
+    
+    return { upvotes, downvotes, userVote };
+}
+
+function deleteRestaurant(dayIndex, mealType, restaurantIndex) {
+    if (confirm("Delete this restaurant suggestion?")) {
+        const key = `${dayIndex}-${mealType}`;
+        if (restaurantSuggestions[key]) {
+            restaurantSuggestions[key].splice(restaurantIndex, 1);
+            saveToFirebase();
+            renderDays();
+        }
+    }
+}
+
+function renderRestaurantSuggestions(dayIndex) {
+    const lunchKey = `${dayIndex}-lunch`;
+    const dinnerKey = `${dayIndex}-dinner`;
+    
+    const lunchSuggestions = restaurantSuggestions[lunchKey] || [];
+    const dinnerSuggestions = restaurantSuggestions[dinnerKey] || [];
+    
+    return `
+        <div class="restaurant-suggestions">
+            <h4 style="margin: 0 0 15px 0; color: var(--primary);">🍽️ Restaurant Suggestions</h4>
+            
+            <!-- LUNCH -->
+            <div class="meal-section">
+                <div class="meal-header">
+                    <div class="meal-title">
+                        🥗 Lunch Options
+                    </div>
+                    <button class="add-restaurant-btn" onclick="addRestaurantSuggestion(${dayIndex}, 'lunch')">
+                        + Suggest Lunch Spot
+                    </button>
+                </div>
+                <div>
+                    ${lunchSuggestions.length > 0 ? lunchSuggestions.map((r, idx) => `
+                        <div class="restaurant-card">
+                            <div class="restaurant-name">${r.name}</div>
+                            <div style="margin: 10px 0;">
+                                <span class="restaurant-cuisine">${r.cuisine}</span>
+                                ${r.location ? `<span style="color: #666; font-size: 0.85rem; margin-left: 8px;">📍 ${r.location}</span>` : ''}
+                            </div>
+                            ${r.priceRange ? `<div class="restaurant-details">💰 ${r.priceRange}</div>` : ''}
+                            ${r.address ? `<div class="restaurant-details">📍 ${r.address}</div>` : ''}
+                            ${r.phone ? `<div class="restaurant-details">📞 <a href="tel:${r.phone}" style="color: var(--primary);">${r.phone}</a></div>` : ''}
+                            ${r.notes ? `<div class="restaurant-details">💡 ${r.notes}</div>` : ''}
+                            ${r.website || r.reservationLink ? `
+                                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                                    ${r.website ? `<a href="${r.website}" target="_blank" class="btn-link" style="font-size: 0.85rem; padding: 6px 12px;">🌐 Website</a>` : ''}
+                                    ${r.reservationLink ? `<a href="${r.reservationLink}" target="_blank" class="btn-link" style="font-size: 0.85rem; padding: 6px 12px; background: #4CAF50; color: white; border-color: #4CAF50;">📅 Reserve</a>` : ''}
+                                </div>
+                            ` : ''}
+                            <div style="font-size: 0.85rem; color: #999; margin-top: 8px; font-style: italic;">
+                                Suggested by ${getUserDisplayName(r.suggestedBy)}
+                            </div>
+                            <div class="restaurant-votes">
+                                ${renderRestaurantVoting(dayIndex, 'lunch', idx)}
+                            </div>
+                            ${currentUser ? `
+                                <div class="restaurant-actions">
+                                    <button class="delete-btn" onclick="deleteRestaurant(${dayIndex}, 'lunch', ${idx})">Delete</button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `).join('') : '<div class="restaurant-suggestion-empty">No lunch suggestions yet. Be the first to suggest!</div>'}
+                </div>
+            </div>
+            
+            <!-- DINNER -->
+            <div class="meal-section">
+                <div class="meal-header">
+                    <div class="meal-title">
+                        🍜 Dinner Options
+                    </div>
+                    <button class="add-restaurant-btn" onclick="addRestaurantSuggestion(${dayIndex}, 'dinner')">
+                        + Suggest Dinner Spot
+                    </button>
+                </div>
+                <div>
+                    ${dinnerSuggestions.length > 0 ? dinnerSuggestions.map((r, idx) => `
+                        <div class="restaurant-card">
+                            <div class="restaurant-name">${r.name}</div>
+                            <div style="margin: 10px 0;">
+                                <span class="restaurant-cuisine">${r.cuisine}</span>
+                                ${r.location ? `<span style="color: #666; font-size: 0.85rem; margin-left: 8px;">📍 ${r.location}</span>` : ''}
+                            </div>
+                            ${r.priceRange ? `<div class="restaurant-details">💰 ${r.priceRange}</div>` : ''}
+                            ${r.address ? `<div class="restaurant-details">📍 ${r.address}</div>` : ''}
+                            ${r.phone ? `<div class="restaurant-details">📞 <a href="tel:${r.phone}" style="color: var(--primary);">${r.phone}</a></div>` : ''}
+                            ${r.notes ? `<div class="restaurant-details">💡 ${r.notes}</div>` : ''}
+                            ${r.website || r.reservationLink ? `
+                                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                                    ${r.website ? `<a href="${r.website}" target="_blank" class="btn-link" style="font-size: 0.85rem; padding: 6px 12px;">🌐 Website</a>` : ''}
+                                    ${r.reservationLink ? `<a href="${r.reservationLink}" target="_blank" class="btn-link" style="font-size: 0.85rem; padding: 6px 12px; background: #4CAF50; color: white; border-color: #4CAF50;">📅 Reserve</a>` : ''}
+                                </div>
+                            ` : ''}
+                            <div style="font-size: 0.85rem; color: #999; margin-top: 8px; font-style: italic;">
+                                Suggested by ${getUserDisplayName(r.suggestedBy)}
+                            </div>
+                            <div class="restaurant-votes">
+                                ${renderRestaurantVoting(dayIndex, 'dinner', idx)}
+                            </div>
+                            ${currentUser ? `
+                                <div class="restaurant-actions">
+                                    <button class="delete-btn" onclick="deleteRestaurant(${dayIndex}, 'dinner', ${idx})">Delete</button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `).join('') : '<div class="restaurant-suggestion-empty">No dinner suggestions yet. Be the first to suggest!</div>'}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderRestaurantVoting(dayIndex, mealType, restaurantIndex) {
+    const { upvotes, downvotes, userVote } = getRestaurantVotes(dayIndex, mealType, restaurantIndex);
+    
+    return `
+        <span style="font-size: 0.9rem; color: #666; font-weight: 500;">Want to try?</span>
+        <button class="restaurant-vote-btn ${userVote === 'up' ? 'voted' : ''}" onclick="voteRestaurant(${dayIndex}, '${mealType}', ${restaurantIndex}, 'up')">
+            👍 <span style="font-weight: bold;">${upvotes}</span>
+        </button>
+        <button class="restaurant-vote-btn ${userVote === 'down' ? 'voted' : ''}" onclick="voteRestaurant(${dayIndex}, '${mealType}', ${restaurantIndex}, 'down')">
+            👎 <span style="font-weight: bold;">${downvotes}</span>
+        </button>
+        <span style="color: #666; font-size: 0.85rem;">${upvotes + downvotes}/4 voted</span>
+    `;
+}
+
+// ===== NEWS SECTION =====
+function updateNewsSection() {
+    const newsItems = document.getElementById("newsItems");
+    if (!newsItems) return;
+    
+    // Get the 5 most recent items from activity feed
+    const recentNews = activityFeed.slice(0, 5);
+    
+    if (recentNews.length === 0) {
+        newsItems.innerHTML = '<div class="news-empty">No recent updates yet. Start planning to see activity here!</div>';
+        return;
+    }
+    
+    newsItems.innerHTML = recentNews.map(item => `
+        <div class="news-item">
+            <div class="news-item-main">${item.message}</div>
+            <div class="news-item-time">${formatTimestamp(item.timestamp)}</div>
+        </div>
+    `).join("");
+}
+
+function getUserDisplayName(user) {
+    return {dewitt: "DeWitt", christine: "Christine", dani: "Dani", kimothy: "Kimothy"}[user] || user;
+}
+</script>
+
+
+
+<!-- RESTAURANT MODAL -->
+<div id="restaurantModal" class="modal">
+    <div class="modal-content">
+        <h3 style="color: var(--primary); margin-bottom: 20px;">🍽️ Add Restaurant Suggestion</h3>
+        <form id="restaurantForm" onsubmit="event.preventDefault(); saveRestaurantSuggestion();">
+            <div class="form-group">
+                <label>Restaurant Name: *</label>
+                <input type="text" id="restaurantName" placeholder="e.g., Ichiran Ramen" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Type of Cuisine:</label>
+                <input type="text" id="restaurantCuisine" placeholder="e.g., Ramen, Sushi, Italian">
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                    <label>Location/Area:</label>
+                    <input type="text" id="restaurantLocation" placeholder="e.g., Shibuya">
+                </div>
+                
+                <div class="form-group">
+                    <label>Price Range:</label>
+                    <input type="text" id="restaurantPrice" placeholder="e.g., $10-20, $$">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Address:</label>
+                <input type="text" id="restaurantAddress" placeholder="Full address (optional)">
+            </div>
+            
+            <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="tel" id="restaurantPhone" placeholder="+81-3-xxxx-xxxx">
+            </div>
+            
+            <div class="form-group">
+                <label>Website URL:</label>
+                <input type="url" id="restaurantWebsite" placeholder="https://restaurant-website.com">
+            </div>
+            
+            <div class="form-group">
+                <label>Reservation Link:</label>
+                <input type="url" id="restaurantReservation" placeholder="https://tabelog.com/reservation-link">
+                <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
+                    💡 OpenTable, Tabelog, restaurant booking page, etc.
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <label>Notes:</label>
+                <textarea id="restaurantNotes" placeholder="e.g., Reservations required 2 weeks ahead, Cash only, Try the tonkotsu ramen"></textarea>
+            </div>
+            
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" onclick="closeRestaurantModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add Restaurant</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
